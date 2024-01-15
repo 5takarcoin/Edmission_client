@@ -24,7 +24,7 @@ const SideBarCheckboxGroup: React.FC = () => {
       <label className="text-md">Choose options:</label>
       {checkboxes.map((checkbox, i) => {
         return (
-          <div className="py-2">
+          <div key={i} className="py-2">
 
           <SingleCheckBox item={checkbox.name}/>
           </div>

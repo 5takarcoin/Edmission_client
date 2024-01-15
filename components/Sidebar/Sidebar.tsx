@@ -52,7 +52,7 @@ export default function Sidebar() {
         <hr className="w-[60%] m-auto py-4" />
         <SideBarCheckboxGroup />
         <hr className="w-[60%] m-auto py-4" />
-        <SidebarSlider min={4} max={8} />
+        <SidebarSlider min={4} minText="8" max={8}  maxText="haha"/>
 
         <SideBarCheckboxGroup />
         <hr className="w-[60%] m-auto py-4" />
@@ -64,8 +64,8 @@ export default function Sidebar() {
           options={["urban/rural/sub", "urban", "rural", "sub"]}
         />
 
-        <SidebarSlider min={1} max={10}/>
-        <SidebarSlider min={4} max={8}/>
+        <SidebarSlider min={1} minText="8" max={10} maxText="haha"/>
+        <SidebarSlider min={4} minText="8" max={8} maxText="haha"/>
       </div>
     </div>
   );

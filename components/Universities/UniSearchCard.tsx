@@ -16,12 +16,12 @@ const tempBadge = {
 
 export default function UniSearchCard() {
   return (
-    <div>
+    <div className="flex-col bg-blue-600">
       <div>maybe sponsored</div>
-      <div>
-        <div>Image</div>
-        <div>
-          <h2>Uni name</h2>
+      <div className="flex items-center">
+        <div className="flex-1 p-4  w-36 h-64"><img className="object-cover  rounded-2xl w-full h-full" src="./ezname.jpg" alt="" /></div>
+        <div className="flex-[3] h-52 bg-red-700">
+          <h2 className="text-3xl font-bold">Uni name</h2>
           <p>
             <span>loc icon</span>
             <span>the loc</span>
