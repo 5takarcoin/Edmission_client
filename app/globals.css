@@ -25,3 +25,19 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+
+/* Slider.css */
+
+/* Custom color for the thumb (dot) */
+input[type="range"]::-webkit-slider-thumb {
+  background-color: green; /* Change this color to your desired color */
+}
+
+/* Additional styling for better cross-browser compatibility */
+input[type="range"]::-moz-range-thumb {
+  background-color: green;
+}
+
+input[type="range"]::-ms-thumb {
+  background-color: green;
+}

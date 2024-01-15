@@ -1,4 +1,5 @@
 import { useState } from "react";
+import SingleCheckBox from "./SingleCheckBox";
 
 type CheckboxState = {
   name: string;
@@ -20,19 +21,12 @@ const SideBarCheckboxGroup: React.FC = () => {
 
   return (
     <div>
-      <label>Choose options:</label>
+      <label className="text-md">Choose options:</label>
       {checkboxes.map((checkbox, i) => {
         return (
-          <div key={i}>
-            <label>
-              <input
-                type="checkbox"
-                name={checkbox.name}
-                checked={checkbox.option}
-                onChange={() => handleCheckboxChange(i)}
-              />
-              {checkbox.name}
-            </label>
+          <div className="py-2">
+
+          <SingleCheckBox item={checkbox.name}/>
           </div>
         );
       })}

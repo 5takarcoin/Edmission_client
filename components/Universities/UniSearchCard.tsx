@@ -1,4 +1,4 @@
-import UniSearchCardBadge from "@/components/UniSearchCardBadge";
+import UniSearchCardBadge from "@/components/Universities/UniSearchCardBadge";
 
 type University = {
   name: string;
