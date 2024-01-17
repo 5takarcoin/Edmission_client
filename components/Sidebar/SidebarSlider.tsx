@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 
-const SidebarSlider = () => {
+const SidebarSlider = ({min, max, minText, maxText}: {min: number, max: number, minText: string, maxText: string}) => {
   const [rangeValue, setRangeValue] = useState(50);
 
-  const handleRangeChange = (e) => {
+  const handleRangeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     // Calculate the new value with the desired step behavior
-    const step = 10; // You can adjust the step value as needed
-    const newValue = Math.round(e.target.value / step) * step;
+    const step: number = 10; // You can adjust the step value as needed
+    const newValue: number = Math.round(Number(e.target.value) / step) * step;
     setRangeValue(newValue);
-  };
-
+  }
+  
   return (
     <div className="">
       <p className="pb-4">Something</p>
