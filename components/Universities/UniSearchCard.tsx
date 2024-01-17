@@ -1,11 +1,19 @@
 import UniSearchCardBadge from "@/components/Universities/UniSearchCardBadge";
 
+import { GoLocation } from "react-icons/go";
+import { RxRadiobutton } from "react-icons/rx";
+import { FaStar } from "react-icons/fa";
+import SponsoredCard from "./SponsoredCard";
+
 type University = {
   name: string;
   location: string;
   description: string;
-  logo: string;
   image: string;
+  genre: string;
+  stars: number;
+  totalReviews: number;
+  sponsored: boolean;
 };
 
 const tempBadge = {
@@ -14,23 +22,33 @@ const tempBadge = {
   desc: "some description",
 };
 
-export default function UniSearchCard() {
+export default function UniSearchCard({name, location, description, image, genre, stars, sponsored, totalReviews}: University) {
   return (
-    <div className="flex-col bg-blue-600">
-      <div>maybe sponsored</div>
+    <div className="flex-col bg-red-100 p-4">
+      {sponsored && 
+      <SponsoredCard />
+      }
       <div className="flex items-center">
-        <div className="flex-1 p-4  w-36 h-64"><img className="object-cover  rounded-2xl w-full h-full" src="./ezname.jpg" alt="" /></div>
-        <div className="flex-[3] h-52 bg-red-700">
-          <h2 className="text-3xl font-bold">Uni name</h2>
-          <p>
-            <span>loc icon</span>
-            <span>the loc</span>
-            <span>dkw icon</span>
-            <span>engineering</span>
-            <span>star icon</span>
-            <span>stars(total reviews)</span>
+        <div className="flex-1 py-4  w-36 h-64">
+          <img className="object-cover  rounded-2xl w-full h-full border-[1px] border-gray-400 border-solid" src={image} alt={`${name} - image`} />
+        </div>
+        <div className="flex-[3] h-52 text-black px-4">
+          <h2 className="text-3xl font-semibold">{name}</h2>
+          <p className="flex items-center gap-2 text-sm py-2">
+            <span>
+              <GoLocation />
+            </span>
+            <span>{location}</span>
+            <span>
+              <RxRadiobutton />
+            </span>
+            <span>{genre}</span>
+            <span>
+              <FaStar />
+            </span>
+            <span>{`${stars} (${totalReviews})`}</span>
           </p>
-          <p>Desc ends with dot dot</p>
+          <p className="pt-2">{description}</p>
         </div>
       </div>
       <div>

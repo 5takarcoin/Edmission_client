@@ -1,5 +1,6 @@
 "use client"
 
+import InputField from "@/components/InputField"
 import { collectGenerateParams } from "next/dist/build/utils"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
@@ -53,18 +54,9 @@ export default function Signup() {
         <div className="flex-col border-2 border-gray-600 p-8 w-1/4 rounded-xl">
           <h1 className="block text-2xl mb-8">Signup</h1>
           <form className="" onSubmit={handleSubmit}>
-            <div className="mb-5">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-              <input onChange={e => setName(e.target.value)} type="text" value={name} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
-            <div className="mb-5">
-              <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-              <input onChange={e => setUsername(e.target.value)} type="text" value={username} id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
-            <div className="mb-5">
-              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-              <input onChange={e => setPassword(e.target.value)} type="password" value={password} id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
+            <InputField value={name} setValue={setName} >Name</InputField>
+            <InputField value={username} setValue={setUsername} >Username</InputField>
+            <InputField value={password} setValue={setPassword} isPassword={true}>Password</InputField>
             <div className="mb-5">
               <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
               <input onChange={e => setImage(e.target.files ? e.target.files[0] : null)} type="file" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
