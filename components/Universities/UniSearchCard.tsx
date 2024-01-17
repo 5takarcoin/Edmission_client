@@ -16,7 +16,7 @@ const tempBadge = {
 
 export default function UniSearchCard() {
   return (
-    <div>
+    <div className="border-2 border-red-500">
       <div>maybe sponsored</div>
       <div>
         <div>Image</div>

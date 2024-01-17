@@ -5,6 +5,8 @@ import { useState } from "react";
 
 type UserType = {
   name: string,
+  image: string,
+  username: string,
 }
 
 export default function Login() {
@@ -12,7 +14,7 @@ export default function Login() {
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
 
-  const [user, setUser] = useState<null | UserType>(null)
+  const [user, setUser] = useState<null | any>(null)
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
@@ -40,6 +42,7 @@ export default function Login() {
             user &&
             <div>
             <h3>Welcome, {user.name}</h3>
+            <img src={`http://localhost:5050/uploads/${user.image}`} alt="haha" />
             <Logout user={user} setUser={setUser}/>
             </div>
           }
