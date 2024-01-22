@@ -1,14 +1,9 @@
-import Sidebar from "@/components/Sidebar/Sidebar";
-import StillCantFind from "@/components/StillCantFind";
-import UniCatCards from "@/components/Universities/UniCatCards";
 import UniHero from "@/components/Universities/UniHero";
-import UniNav from "@/components/Universities/UniNav";
-import UniSearchCard from "@/components/Universities/UniSearchCard";
 import { University } from "@/types/UniversityTypes";
 
 const uni: University = {
   name: "Name",
-  image: "../ezname.jpg",
+  image: "lists.svg",
   logo: "logo.svg",
   location: "Dhaka, Bangladesh",
   description:
@@ -23,11 +18,9 @@ const uni: University = {
 export default function page() {
   return (
     <div className="bg-green-200 space-y-8">
+      <img src={uni.logo} alt="" />
       <div className="">
         <UniHero uni={uni}/>
-        {/* <UniNav /> */}
-        <UniCatCards />
-
       </div>
     </div>
   );
