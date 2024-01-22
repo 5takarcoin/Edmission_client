@@ -10,7 +10,9 @@ export default function Navbar() {
   return (
     <div className="px-4">
       <div className="flex items-center justify-between py-4">
-        <div className="text-2xl font-bold">Logo</div>
+        <div className="h-8">
+          <img className='h-full' src="./edmission.svg" alt="" />
+        </div>
 
         <button
           className="lg:hidden focus:outline- z-10"

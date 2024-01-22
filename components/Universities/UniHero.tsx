@@ -1,28 +1,26 @@
-type University = {
-    name: string,
-    location: string,
-    description: string,
-    logo: string,
-    image: string,
-}
+import { University } from "@/types/UniversityTypes"
+import { FaStar } from "react-icons/fa"
+import { GoLocation } from "react-icons/go"
+
 
 export default function UniHero({uni}: {uni: University}) {
   return (
-    <div>
-      <div>
-        <div>
-            <div>UniLogo {uni.logo}</div>
-            <div>
-                <h2>Name {uni.name}</h2>
-                <p><span>location icon</span><span>uni location {uni.location}</span><span>star icon</span><span>rating(total)</span></p>
+    <div className="flex gap-4">
+      <div className="flex-col space-y-8 flex-[2]">
+        <div className="flex items-center">
+            <div className="h-32 w-32"><img src={uni.logo} alt={`${uni.name} university logo`} /></div>
+            <div className="space-y-4 p-4">
+                <h2 className="text-4xl font-bold">{uni.name}</h2>
+                <p className="flex items-center gap-2"><span><GoLocation /></span><span>{uni.location}</span><span><FaStar /></span><span>{`${uni.stars} (${uni.totalReviews})`}</span></p>
             </div>
         </div>
-        <div>
-            <p>{uni.description}Bangladesh University of Engineering and Technology, commonly known by the acronym BUET, is a public technological research university in Dhaka, Bangladesh. Founded in 1876 as the Dacca Survey School and gained university status in 1962, it is the oldest institution for the study of engineering, architecture, and urban planning.</p>
+        <div className="text-md ">
+            <p>{uni.description}</p>
         </div>
       </div>
-      <div>
-        <div>Image {uni.image}</div>
+      <div className="flex-1">
+        <div className="h-full ">
+          <img className="h-full object-cover rounded-lg" src={uni.image} alt="" /></div>
         <button>Compare</button>
       </div>
     </div>

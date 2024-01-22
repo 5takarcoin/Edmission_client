@@ -4,17 +4,10 @@ import { GoLocation } from "react-icons/go";
 import { RxRadiobutton } from "react-icons/rx";
 import { FaStar } from "react-icons/fa";
 import SponsoredCard from "./SponsoredCard";
+import { University } from "@/types/UniversityTypes";
+import VR from "../VR";
 
-type University = {
-  name: string;
-  location: string;
-  description: string;
-  image: string;
-  genre: string;
-  stars: number;
-  totalReviews: number;
-  sponsored: boolean;
-};
+
 
 const tempBadge = {
   header: "Extremely Selective",
@@ -51,10 +44,11 @@ export default function UniSearchCard({name, location, description, image, genre
           <p className="pt-2">{description}</p>
         </div>
       </div>
-      <div>
-        <UniSearchCardBadge badge={tempBadge} />
-        <UniSearchCardBadge badge={tempBadge} />
-        <UniSearchCardBadge badge={tempBadge} />
+      <div className="space-x-4">
+        <UniSearchCardBadge badge={tempBadge}><GoLocation /></UniSearchCardBadge>
+        <VR />
+        <UniSearchCardBadge badge={tempBadge}><RxRadiobutton /></UniSearchCardBadge>
+        <UniSearchCardBadge badge={tempBadge}><FaStar /></UniSearchCardBadge>
       </div>
     </div>
   );
