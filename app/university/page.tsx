@@ -1,5 +1,6 @@
 import Sidebar from "@/components/Sidebar/Sidebar";
 import StillCantFind from "@/components/StillCantFind";
+import AlumniCards from "@/components/Universities/AlumniCards";
 import UniCatCards from "@/components/Universities/UniCatCards";
 import UniHero from "@/components/Universities/UniHero";
 import UniNav from "@/components/Universities/UniNav";
@@ -27,7 +28,7 @@ export default function page() {
         <UniHero uni={uni}/>
         {/* <UniNav /> */}
         <UniCatCards />
-
+        <AlumniCards />
       </div>
     </div>
   );

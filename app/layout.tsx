@@ -19,16 +19,16 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-white text-ed-text`}>
         <ReduxProvider>
           <div className="App">
             <nav>
               <Navbar />
             </nav>
-            <div className="max-w-[90%] w-[1200px] m-auto">
+            <div className="max-w-[60%] w-[1200px] m-auto">
               <main>{children}</main>
             </div>
-            <Footer />
+            {/* <Footer /> */}
           </div>
         </ReduxProvider>
       </body>

@@ -1,9 +1,11 @@
 export default function Footer() {
   return (
-    <div className="flex-col items-center justify-between bg-red-200 px-48 py-12">
+    <div className="flex-col items-center justify-between bg-ed-white px-48 py-12">
       <div className="flex justify-between">
-        <div>
-          <div className="text-4xl font-bold py-4">Logo</div>
+        <div className="space-y-8">
+          <div className="h-4">
+            <img className="h-8" src="./edmission.svg" alt="" />
+          </div>
           <p className="">Helping you find your ideal institution.</p>
           <h3 className="py-16">A concern of Khiyo Inc.</h3>
         </div>

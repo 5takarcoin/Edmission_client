@@ -2,17 +2,17 @@ import { User } from "@/types/UserType"
 import { createSlice } from "@reduxjs/toolkit"
 
 
-const initialState: User | {} = {}
+const initialState: User = {} as User
 
 const userSlice = createSlice({
     name: 'user',
     initialState,
     reducers: {
         login(state, action) {
-            return {...initialState, ...action.payload}
+            return {...state, ...action.payload}
         },
         logout() {
-            return {}
+            return {} as User
         },
     }
 })

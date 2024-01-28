@@ -1,9 +1,13 @@
+import { AppDispatch } from "@/store/store";
+import { logout } from "@/store/userSlice";
+import { useDispatch } from "react-redux";
+
 type UserType = {
     name: string
 }
 
 export default function Logout({user, setUser} : { user: UserType, setUser: React.Dispatch<React.SetStateAction<UserType | null>>}) {
-
+  const dispatch = useDispatch<AppDispatch>()
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
@@ -12,6 +16,7 @@ export default function Logout({user, setUser} : { user: UserType, setUser: Reac
       credentials: "include",
     });
     setUser(null);
+    dispatch(logout())
   };
 
   return (

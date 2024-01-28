@@ -31,10 +31,8 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
   };
 
   return (
-    <div className="bg-white p-8 pb-16 relative rounded-lg">
-      <div>
-        <img src="./quote.svg" alt="" />
-        <div className="relative max-w-3xl mx-auto p-24">
+
+        <div className="relative max-w-3xl mx-auto">
         {testimonials.map((testimonial, index) => (
           <div
           key={testimonial.id}
@@ -42,25 +40,31 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
             index === currentSlide ? "opacity-100" : "opacity-0"
           }`}
           >
-            <p className="text-md pb-6 text-justify">{testimonial.text}</p>
-            <p className="text-sm font-semibold mt-2">{testimonial.author}</p>
-            <p className="text-sm mt-2">{testimonial.about}</p>
+            <div className="w-[full] pt-8">
+
+                <div className="bg-white p-8 relative rounded-lg text-ed-text">
+      <div>
+        <img className="h-8 pb-2" src="./quote.svg" alt="" />
+            <p className="text-sm pb-6">{testimonial.text}</p>
+            <p className="text-xs font-semibold mt-2">{testimonial.author}</p>
+            <p className="text-xs mt-2">{testimonial.about}</p>
           </div>
-        ))}
+            </div>
         </div>
       </div>
+        ))}
 
-      <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
+      {/* <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
         {testimonials.map((_, index) => (
           <button
             key={index}
             onClick={() => handleDotClick(index)}
             className={`w-2 h-2 rounded-full bg-gray-400 focus:outline-none ${
-              index === currentSlide ? "bg-blue-500" : ""
+              index === currentSlide ? "" : ""
             }`}
           ></button>
         ))}
-      </div>
+      </div> */}
     </div>
   );
 };

@@ -2,7 +2,10 @@
 
 import InputField from "@/components/InputField";
 import Logout from "@/components/Logout";
+import { AppDispatch } from "@/store/store";
+import { login } from "@/store/userSlice";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
 
 type UserType = {
   name: string,
@@ -14,6 +17,8 @@ export default function Login() {
 
   const [username, setUsername] = useState("")
   const [password, setPassword] = useState("")
+
+  const dispatch = useDispatch<AppDispatch>()
 
   const [user, setUser] = useState<null | any>(null)
 
@@ -32,7 +37,11 @@ export default function Login() {
     })
     const theUser = await response.json()
     if(response.status === 200)
+    {
+      console.log(theUser)
+      dispatch(login(theUser))
       setUser(theUser)
+    }
   }
 
   return (
@@ -48,8 +57,8 @@ export default function Login() {
             </div>
           }
            <form className="" onSubmit={handleSubmit}>
-            <InputField value={username} setValue={setUsername} >Name</InputField>
-            <InputField value={password} setValue={setPassword} isPassword>Password</InputField>
+            <InputField id="login_username" value={username} setValue={setUsername} >Name</InputField>
+            <InputField id="login_password" value={password} setValue={setPassword} isPassword>Password</InputField>
             <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
           </form>
           </div>

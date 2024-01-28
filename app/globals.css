@@ -2,19 +2,18 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  /* border: 1px solid red; */
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+:root {
+  --foreground-rgb: #ff0000;
+  --background-start-rgb: 255, 255, 255;
 }
+
 
 body {
   color: rgb(var(--foreground-rgb));
@@ -24,20 +23,11 @@ body {
       rgb(var(--background-end-rgb))
     )
     rgb(var(--background-start-rgb));
+
+  overflow-x: hidden;
 }
 
-/* Slider.css */
-
-/* Custom color for the thumb (dot) */
-input[type="range"]::-webkit-slider-thumb {
-  background-color: green; /* Change this color to your desired color */
+body.hide-scroll {
+  overflow: hidden;
 }
 
-/* Additional styling for better cross-browser compatibility */
-input[type="range"]::-moz-range-thumb {
-  background-color: green;
-}
-
-input[type="range"]::-ms-thumb {
-  background-color: green;
-}
