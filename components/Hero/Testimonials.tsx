@@ -24,7 +24,7 @@ function Testimonials() {
     },
   ];
   return (
-    <div className="w-full bg-ed-prime h-96">
+    <div className="w-full h-96">
       <TestimonialCarousel testimonials={testis} />
     </div>
   );

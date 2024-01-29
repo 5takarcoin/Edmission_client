@@ -14,10 +14,16 @@ export default function Home() {
         <div className=" h-36"></div>
         <Features />
         <img className="absolute -top-28 -z-10" src="./wave_up.svg" alt="" />
-        <img className="absolute -bottom-48 -z-10" src="./wave_down.svg" alt="" />
+        <img
+          className="absolute -bottom-48 -z-10"
+          src="./wave_down.svg"
+          alt=""
+        />
         <div className="top-0 h-[200px]] bg-ed-prim"></div>
       </div>
-      <NotSure />
+      <div className="w-[100vw]">
+        <NotSure />
+      </div>
     </main>
   );
 }

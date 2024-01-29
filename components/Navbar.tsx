@@ -3,11 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useAppSelector } from "@/store/store";
-import { FaStar } from "react-icons/fa";
+import { RxCross1 } from "react-icons/rx";
 
 export default function Navbar() {
   const user = useAppSelector((state) => state.user);
-  const [menuOpen, setMenuOpen] = useState(true);
+  const [menuOpen, setMenuOpen] = useState(false);
 
   const links = [
     {
@@ -24,7 +24,7 @@ export default function Navbar() {
     },
     {
       title: "Universities",
-      link: "/",
+      link: "/universities",
     },
     {
       title: "EdJourney",
@@ -103,60 +103,32 @@ export default function Navbar() {
               !menuOpen && "hidden"
             } flex justify-end w-[100vw] h-[100vh] bg-black bg-opacity-40 absolute top-0 right-0`}>
           <div
-            className={`relative h-full bg-blue-400 w-[70%] flex items-center`}
+            className={`relative h-full bg-ed-prim w-[75%] text-white flex items-center`}
           >
 
             <div onClick={() => {
             setMenuOpen(false);
             document.body.classList.remove('hide-scroll');
-          }} className="absolute top-8 right-8 p-8 text-2xl"><FaStar /></div>
+          }} className="absolute top-4 right-4 p-8 text-2xl"><RxCross1 /></div>
 
-            <div className="h-[50%] w-[80%] flex-col flex justify-around">
+            <div className="h-[40%] w-[85%] flex-col flex justify-around">
 
+            {links.map((link, i) => {
+              return (
 
-              <div className="flex items-center justify-end">
-                <Link href="/" className="text-gray-700 hover:text-gray-900">
-                  Home
+                <div key={i} className="flex items-center justify-end">
+                <Link onClick={() => {setMenuOpen(false);
+            document.body.classList.remove('hide-scroll');}} href={link.link} className="hover:text-ed-white">
+                  {link.title}
                 </Link>
               </div>
-
-
-              <div className="flex items-center justify-end">
-                <Link
-                  href="/high-schools"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  High Schools
-                </Link>
-              </div>
-              <div className="flex items-center justify-end">
-                <Link
-                  href="/colleges"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  Colleges
-                </Link>
-              </div>
-              <div className="flex items-center justify-end">
-                <Link
-                  href="/universities"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  Universities
-                </Link>
-              </div>
-              <div className="flex items-center justify-end">
-                <Link
-                  href="/edjourney"
-                  className="text-gray-700 hover:text-gray-900"
-                >
-                  EdJourney
-                </Link>
-              </div>
+                )
+            })}
+              
               <div className="flex items-center justify-end">
                 <Link
                   href="/login"
-                  className="bg-blue-500 text-white px-4 py-2 rounded"
+                  className="border-2 border-ed-white text-white hover:text-ed-prim hover:bg-ed-white px-8 py-2 rounded-md"
                 >
                   Login
                 </Link>

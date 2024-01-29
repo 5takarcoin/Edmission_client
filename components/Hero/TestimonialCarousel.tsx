@@ -44,10 +44,10 @@ const TestimonialCarousel: React.FC<TestimonialCarouselProps> = ({
 
                 <div className="bg-white p-8 relative rounded-lg text-ed-text">
       <div>
-        <img className="h-8 pb-2" src="./quote.svg" alt="" />
-            <p className="text-sm pb-6">{testimonial.text}</p>
-            <p className="text-xs font-semibold mt-2">{testimonial.author}</p>
-            <p className="text-xs mt-2">{testimonial.about}</p>
+        <img className="h-8 pb-2 mb-2" src="./quote.svg" alt="" />
+            <p className="text-sm text-start pb-6">{testimonial.text}</p>
+            <p className="text-xs text-end font-semibold">{testimonial.author}</p>
+            <p className="text-xs text-end">{testimonial.about}</p>
           </div>
             </div>
         </div>
