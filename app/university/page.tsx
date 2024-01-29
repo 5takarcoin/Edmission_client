@@ -23,12 +23,13 @@ const uni: University = {
 
 export default function page() {
   return (
-    <div className="bg-green-200 space-y-8">
+    <div className="space-y-8">
       <div className="">
         <UniHero uni={uni}/>
         {/* <UniNav /> */}
         <UniCatCards />
         <AlumniCards />
+        <div className="h-4"></div>
       </div>
     </div>
   );

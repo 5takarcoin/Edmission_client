@@ -30,7 +30,7 @@ export default function Navbar() {
       title: "EdJourney",
       link: "/",
     },
-  ]
+  ];
 
   return (
     // <div className="px-4">
@@ -80,7 +80,7 @@ export default function Navbar() {
           className="lg:hidden focus:outline"
           onClick={() => {
             setMenuOpen(true);
-            document.body.classList.add('hide-scroll');
+            document.body.classList.add("hide-scroll");
           }}
         >
           <svg
@@ -99,32 +99,42 @@ export default function Navbar() {
           </svg>
         </button>
 
-        <div className={`${
-              !menuOpen && "hidden"
-            } flex justify-end w-[100vw] h-[100vh] bg-black bg-opacity-40 absolute top-0 right-0`}>
+        <div
+          className={`${
+            !menuOpen && "hidden"
+          } flex justify-end w-[100vw] h-[100vh] bg-black bg-opacity-40 absolute top-0 right-0`}
+        >
           <div
             className={`relative h-full bg-ed-prim w-[75%] text-white flex items-center`}
           >
-
-            <div onClick={() => {
-            setMenuOpen(false);
-            document.body.classList.remove('hide-scroll');
-          }} className="absolute top-4 right-4 p-8 text-2xl"><RxCross1 /></div>
+            <div
+              onClick={() => {
+                setMenuOpen(false);
+                document.body.classList.remove("hide-scroll");
+              }}
+              className="absolute top-4 right-4 p-8 text-2xl"
+            >
+              <RxCross1 />
+            </div>
 
             <div className="h-[40%] w-[85%] flex-col flex justify-around">
+              {links.map((link, i) => {
+                return (
+                  <div key={i} className="flex items-center justify-end">
+                    <Link
+                      onClick={() => {
+                        setMenuOpen(false);
+                        document.body.classList.remove("hide-scroll");
+                      }}
+                      href={link.link}
+                      className="hover:text-ed-white"
+                    >
+                      {link.title}
+                    </Link>
+                  </div>
+                );
+              })}
 
-            {links.map((link, i) => {
-              return (
-
-                <div key={i} className="flex items-center justify-end">
-                <Link onClick={() => {setMenuOpen(false);
-            document.body.classList.remove('hide-scroll');}} href={link.link} className="hover:text-ed-white">
-                  {link.title}
-                </Link>
-              </div>
-                )
-            })}
-              
               <div className="flex items-center justify-end">
                 <Link
                   href="/login"

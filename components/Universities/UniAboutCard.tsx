@@ -5,7 +5,7 @@ function UniAboutCard() {
   return (
     <div className="min-w-[48%]">
       <UniCatCard title="About">
-        <div>
+        <div className="flex flex-col gap-2">
           <div className="flex gap-2 items-center">
             <FaStar />
             <p>Ye It's Good</p>

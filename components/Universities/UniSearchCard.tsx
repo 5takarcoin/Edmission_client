@@ -24,7 +24,7 @@ export default function UniSearchCard({
   totalReviews,
 }: University) {
   return (
-    <div className="flex-col bg-red-100 p-4 rounded-lg">
+    <div className="flex-col bg-ed-card text-ed-text p-4 rounded-lg">
       {sponsored && <SponsoredCard />}
       <div className="flex flex-col items-center">
         <div className="flex-1 py-4  w-full h-64">

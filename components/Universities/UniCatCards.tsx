@@ -4,7 +4,7 @@ import UniAboutCard from "./UniAboutCard";
 
 function UniCatCards() {
   return (
-    <div className="flex flex-wrap justify-between">
+    <div className="flex flex-col flex-wrap justify-between">
       
       <UniAboutCard />
       <UniAboutCard />

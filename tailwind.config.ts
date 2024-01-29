@@ -12,7 +12,9 @@ const config: Config = {
         "ed-text": "#112206",
         "ed-prim": "#c84771",
         "ed-sec": "#d78979",
-        "ed-white": "#dedede"
+        "ed-white": "#dedede",
+        "ed-card": "#faeef2",
+        "ed-badge": "#f3d0ce"
       },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
