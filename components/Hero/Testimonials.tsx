@@ -24,7 +24,7 @@ function Testimonials() {
     },
   ];
   return (
-    <div className="w-full h-96">
+    <div className="w-full md:w-10/12 m-auto h-96">
       <TestimonialCarousel testimonials={testis} />
     </div>
   );

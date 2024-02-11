@@ -10,7 +10,7 @@ export default function NotSure() {
           schools tailored to fit your needs.
         </p>
         <div>
-          <img className="h-80 text-center w-full -mt-8" src="./checklist.svg" alt="" />
+          <img className="h-80 md:w-8/12 m-auto md:h-auto text-center w-full -mt-8" src="./checklist.svg" alt="" />
         </div>
         <button className="m-auto border-ed-sec border-2 text-ed-text border-solid rounded-md px-8 py-2 flex gap-2 items-center"><span>Take the Quiz</span> <span className="text-xl"><GoArrowRight /></span> </button>
       </div>
@@ -25,7 +25,7 @@ export default function NotSure() {
           <button className="border-ed-sec border-2 text-ed-text border-solid rounded-md px-8 py-2 flex gap-2 items-center"><span>Claim Your Institution</span> <span className="text-xl"><GoArrowRight /></span> </button>
         </div>
         <div className="flex-1">
-          <img className="h-80" src="./campus.svg" alt="campus" />
+          <img className="h-80 md:w-10/12 m-auto md:h-auto" src="./campus.svg" alt="campus" />
         </div>
       </div>
     </div>

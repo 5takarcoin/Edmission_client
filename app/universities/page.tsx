@@ -84,24 +84,26 @@ export default function page() {
         </p>
       </div>
 
-      <div className="flex flex-col">
-        <div className="hidden md:block md:flex-1">
+      <div className="flex flex-col gap-4 lg:flex-row">
+        <div className="hidden lg:block lg:flex-1">
           <Sidebar />
         </div>
-        <div className="w-full p-4 text-md flex justify-between items-center bg-ed-white rounded-md">
+        <div className="lg:hidden w-full p-4 text-md flex justify-between items-center bg-ed-white rounded-md">
           <span>Show filters</span>
           <span className="text-2xl">
             <GoChevronDown />
           </span>
         </div>
-        <div className="md:flex-[3] py-4">
+        <div className="md:flex-[3] py-4 lg:p-0">
           {/* <p>sort relevance bar</p> */}
           {customUni.map((uni, i) => {
             return (
-              <div className="py-2">
-                <Link href={`university/${uni.identifier}`}>
-                  <UniSearchCard {...uni} />
-                </Link>
+              <div className="flex flex-col gap-4">
+                <div className="">
+                  <Link href={`university/${uni.identifier}`}>
+                    <UniSearchCard {...uni} />
+                  </Link>
+                </div>
               </div>
             );
           })}

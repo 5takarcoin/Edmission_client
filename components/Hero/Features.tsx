@@ -2,9 +2,7 @@ import FeaturesCard from "./FeaturesCard";
 import TestimonialCarousel from "./TestimonialCarousel";
 import Testimonials from "./Testimonials";
 
-
 export default function Features() {
-  
   return (
     <div className="flex-col items-center justify-between text-white bg-ed-prim w-[calc(100vw+1px)]">
       <div className="flex-col items-center justify-between m-auto text-center w-11/12">
@@ -17,7 +15,7 @@ export default function Features() {
         </p>
       </div>
       <div className="">
-        <div className="flex flex-col items-center justify-between w-[100vw]">
+        <div className="flex flex-col md:flex-row items-center justify-between w-[100vw]">
           <div className="w-full">
             <FeaturesCard
               img="./search.svg"
