@@ -37,24 +37,24 @@ export default function UniSearchCard({
         <div className="flex-[2] md:px-4 text-black px-2">
           <h2 className="text-3xl font-semibold">{name}</h2>
           <p className="flex flex-col gap-2 text-sm py-2">
-            <div className="flex items-center gap-2">
+            <span className="flex items-center gap-2">
               <span>
                 <GoLocation />
               </span>
               <span>{location}</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </span>
+            <span className="flex items-center gap-2">
               <span>
                 <RxRadiobutton />
               </span>
               <span>{genre}</span>
-            </div>
-            <div className="flex items-center gap-2">
+            </span>
+            <span className="flex items-center gap-2">
               <span>
                 <FaStar />
               </span>
               <span>{`${stars} (${totalReviews})`}</span>
-            </div>
+            </span>
           </p>
           <p className="pt-2 text-sm">{description}</p>
         </div>

@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-// import { Inter } from "next/font/google";
+import { Inter } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import ReduxProvider from "@/components/Redux/ReduxProvider";
 
-// const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "Edmission",
@@ -19,8 +19,8 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className={`font-inter bg-white text-ed-text`}>
-      {/* <body className={`${inter.className} bg-white text-ed-text`}> */}
+      {/* <body className={`font-inter bg-white text-ed-text`}> */}
+      <body className={`${inter.className} bg-white text-ed-text`}>
         <ReduxProvider>
           <div className="App min-h-[100vh] flex flex-col justify-between">
             <nav>

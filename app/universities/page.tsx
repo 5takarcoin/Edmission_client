@@ -74,6 +74,7 @@ export default function page() {
     //   </div>
     // </div>
     // </div>
+    // <p>BAAAAAAAAAAAL</p>
 
     <div className="">
       <div className="">
@@ -94,13 +95,13 @@ export default function page() {
             <GoChevronDown />
           </span>
         </div>
-        <div className="md:flex-[3] py-4 lg:p-0">
+        <div className="md:flex-[3] flex flex-col gap-4 lg:p-0">
           {/* <p>sort relevance bar</p> */}
           {customUni.map((uni, i) => {
             return (
-                  <Link href={`university/${uni.identifier}`}>
-                    <UniSearchCard {...uni} />
-                  </Link>
+              <Link key={i} href={`university/${uni.identifier}`}>
+                <UniSearchCard {...uni} />
+              </Link>
             );
           })}
         </div>
