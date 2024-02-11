@@ -13,18 +13,18 @@ export default function UniHero({ uni }: { uni: University }) {
           <div className="space-y-4 p-4">
             <h2 className="text-4xl font-bold">{uni.name}</h2>
             <p className="flex flex-col gap-2">
-              <div className="flex items-center gap-2">
+              <span className="flex items-center gap-2">
                 <span>
                   <GoLocation />
                 </span>
                 <span>{uni.location}</span>
-              </div>
-              <div className="flex items-center gap-2">
+              </span>
+              <span className="flex items-center gap-2">
                 <span>
                   <FaStar />
                 </span>
                 <span>{`${uni.stars} (${uni.totalReviews})`}</span>
-              </div>
+              </span>
             </p>
           </div>
         </div>
