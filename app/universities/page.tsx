@@ -98,13 +98,9 @@ export default function page() {
           {/* <p>sort relevance bar</p> */}
           {customUni.map((uni, i) => {
             return (
-              <div className="flex flex-col gap-4">
-                <div className="">
                   <Link href={`university/${uni.identifier}`}>
                     <UniSearchCard {...uni} />
                   </Link>
-                </div>
-              </div>
             );
           })}
         </div>

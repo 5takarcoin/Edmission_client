@@ -16,6 +16,9 @@ const config: Config = {
         "ed-card": "#faeef2",
         "ed-badge": "#f3d0ce"
       },
+      fontFamily: {
+        inter: ['Inter', 'sans-serif'],
+      },
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
