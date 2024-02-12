@@ -9,7 +9,7 @@ export default function Home() {
         <Hero />
       </div>
       <div className="relative">
-        <img className="w-full -mt-32 md:-mt-16 -mb-16 md:-mb-28" src="./wave_up.svg" alt="" />
+        <img className="w-full -mt-32 md:-mt-48 -mb-16 md:-mb-36" src="./wave_up.svg" alt="" />
         <Features />
         <img
           className="-mt-28 md:-mt-48 -mb-28 md:-mb-56 w-full"

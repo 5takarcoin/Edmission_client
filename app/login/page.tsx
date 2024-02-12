@@ -45,9 +45,9 @@ export default function Login() {
   }
 
   return (
-    <div className="flex items-center justify-center h-screen">
-        <div className="flex-col border-2 border-gray-600 p-8 w-1/4 rounded-xl">
-          <h1 className="block text-2xl mb-8">Login</h1>
+    <div className="flex text-ed-text items-center justify-center min-h-[600px]">
+        <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl">
+          <h1 className="block text-2xl mb-8 font-bold">Login</h1>
           {
             user &&
             <div>
@@ -59,7 +59,7 @@ export default function Login() {
            <form className="" onSubmit={handleSubmit}>
             <InputField id="login_username" value={username} setValue={setUsername} >Name</InputField>
             <InputField id="login_password" value={password} setValue={setPassword} isPassword>Password</InputField>
-            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Login</button>
+            <button type="submit" className="text-ed-text bg-white hover:bg-ed-sec hover:text-white border-solid border-2 border-ed-sec font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Login</button>
           </form>
           </div>
         </div>

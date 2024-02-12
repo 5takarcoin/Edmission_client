@@ -6,7 +6,7 @@ import { University } from "@/types/UniversityTypes";
 
 const uni: University = {
   name: "Name",
-  image: "list.svg",
+  image: "ezname.jpg",
   logo: "logo.svg",
   location: "Dhaka, Bangladesh",
   description:
@@ -20,7 +20,7 @@ const uni: University = {
 
 export default function page() {
   return (
-    <div className="bg-green-200 space-y-8">
+    <div className="">
       <img src={uni.logo} alt="" />
       <div className="">
         <UniHero uni={uni}/>

@@ -3,7 +3,7 @@ import { GoArrowRight } from "react-icons/go";
 export default function NotSure() {
   return (
     <div className="flex-col items-center justify-between">
-      <div className=" text-center pt-36">
+      <div className=" text-center pt-24 md:pt-36">
         <h1 className="text-4xl font-bold">Not Sure Where To Start?</h1>
         <p className="text-md p-6" >
           Tell us what matters most to you and we'll create a custom list of
@@ -12,7 +12,7 @@ export default function NotSure() {
         <div>
           <img className="h-80 md:w-8/12 m-auto md:h-auto text-center w-full -mt-8" src="./checklist.svg" alt="" />
         </div>
-        <button className="m-auto border-ed-sec border-2 text-ed-text border-solid rounded-md px-8 py-2 flex gap-2 items-center"><span>Take the Quiz</span> <span className="text-xl"><GoArrowRight /></span> </button>
+        <button className="m-auto border-ed-sec border-2 text-ed-text hover:text-white hover:bg-ed-sec border-solid rounded-md px-8 py-2 flex gap-2 items-center"><span>Take the Quiz</span> <span className="text-xl"><GoArrowRight /></span> </button>
       </div>
       <div className="flex flex-col items-center justify-between">
         <div className="flex-col gap-8 space-y-8 pr-8 p-12 pb-0">
@@ -22,7 +22,7 @@ export default function NotSure() {
             more about how you can partner with Edmission to connect with
             students and families throughout the school search process.
           </p>
-          <button className="border-ed-sec border-2 text-ed-text border-solid rounded-md px-8 py-2 flex gap-2 items-center"><span>Claim Your Institution</span> <span className="text-xl"><GoArrowRight /></span> </button>
+          <button className="border-ed-sec border-2 text-ed-text hover:text-white hover:bg-ed-sec border-solid rounded-md px-8 py-2 flex gap-2 items-center"><span>Claim Your Institution</span> <span className="text-xl"><GoArrowRight /></span> </button>
         </div>
         <div className="flex-1">
           <img className="h-80 md:w-10/12 m-auto md:h-auto" src="./campus.svg" alt="campus" />

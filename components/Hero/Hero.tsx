@@ -3,7 +3,7 @@ import HeroCard from "./HeroCard";
 export default function Hero() {
   return (
     <div className="flex flex-col px-6 justify-around h-full text-center">
-      <div className="space-y-4 w-[90vw] m-auto min-w-[70%]">
+      <div className="space-y-4 w-[90vw] m-auto min-w-[70%] md:max-w-[80%]">
         <h1 className="text-5xl text-ed-text font-bold">
           Find Your Ideal Educational Institution
         </h1>

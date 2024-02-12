@@ -4,11 +4,11 @@ import { GoLocation } from "react-icons/go";
 
 export default function UniHero({ uni }: { uni: University }) {
   return (
-    <div className="flex flex-col gap-4 px-2">
+    <div className="flex flex-col lg:flex-row gap-4 px-2 md:px-12">
       <div className="flex-col space-y-8 flex-[2]">
         <div className="flex items-center">
           <div className="h-32 w-32">
-            <img className="" src={uni.logo} alt={`${uni.name} university logo`} />
+            <img className="" src={"/" + uni.logo} alt={`${uni.name} university logo`} />
           </div>
           <div className="space-y-4 p-4">
             <h2 className="text-4xl font-bold">{uni.name}</h2>
@@ -33,10 +33,10 @@ export default function UniHero({ uni }: { uni: University }) {
         </div>
       </div>
       <div className="flex-1">
-        <div className="h-64 pt-4">
+        <div className="h-full pt-4 flex items-center justify-center">
           <img
-            className="h-full object-cover rounded-lg"
-            src={uni.image}
+            className="w-full h-full md:h-80 object-cover rounded-lg"
+            src={"/" + uni.image}
             alt=""
           />
         </div>

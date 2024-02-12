@@ -36,7 +36,7 @@ export default function UniSearchCard({
         </div>
         <div className="flex-[2] md:px-4 text-black px-2">
           <h2 className="text-3xl font-semibold">{name}</h2>
-          <p className="flex flex-col md:items-center gap-2 text-sm py-2">
+          <p className="flex flex-col gap-2 text-sm py-2">
             <span className="flex items-center gap-2">
               <span>
                 <GoLocation />
