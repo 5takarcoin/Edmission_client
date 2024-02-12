@@ -1,8 +1,6 @@
 import Features from "@/components/Hero/Features";
 import Hero from "@/components/Hero/Hero";
 import NotSure from "@/components/NotSure";
-import Sidebar from "@/components/Sidebar/Sidebar";
-import StillCantFind from "@/components/StillCantFind";
 
 export default function Home() {
   return (
@@ -11,15 +9,13 @@ export default function Home() {
         <Hero />
       </div>
       <div className="relative">
-        <div className=" h-36"></div>
+        <img className="w-full -mt-32 md:-mt-16 -mb-16 md:-mb-28" src="./wave_up.svg" alt="" />
         <Features />
-        <img className="absolute -top-28 -z-10" src="./wave_up.svg" alt="" />
         <img
-          className="absolute -bottom-48 -z-10"
+          className="-mt-28 md:-mt-48 -mb-28 md:-mb-56 w-full"
           src="./wave_down.svg"
           alt=""
         />
-        <div className="top-0 h-[200px]] bg-ed-prim"></div>
       </div>
       <div className="w-[100vw]">
         <NotSure />

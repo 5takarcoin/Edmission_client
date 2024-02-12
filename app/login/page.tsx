@@ -52,7 +52,7 @@ export default function Login() {
             user &&
             <div>
             <h3>Welcome, {user.name}</h3>
-            <img src={`http://localhost:5050/uploads/${user.image}`} alt="haha" />
+            <img src={user.image} alt="haha" />
             <Logout user={user} setUser={setUser}/>
             </div>
           }

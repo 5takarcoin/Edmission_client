@@ -2,7 +2,7 @@ import HeroCard from "./HeroCard";
 
 export default function Hero() {
   return (
-    <div className="flex flex-col px-6 justify-around h-full md:max-w-full lg:max-w-[90%] lg:w-[900px] text-center">
+    <div className="flex flex-col px-6 justify-around h-full text-center">
       <div className="space-y-4 w-[90vw] m-auto min-w-[70%]">
         <h1 className="text-5xl text-ed-text font-bold">
           Find Your Ideal Educational Institution
@@ -17,25 +17,14 @@ export default function Hero() {
         <p className="text-ed-sec font-semibold pb-8">
           Select a Category to Start Your Search
         </p>
-        {/* <div className="flex flex-col p-8 bg-red-200 border-[20px]">
-          <div>
+        <div className="p-4 flex flex-col md:flex-row gap-4">
+        <div className="flex-1">
             <HeroCard img="./high_schools.svg" title="High Schools" />
           </div>
-          <div>
+          <div className="flex-1">
             <HeroCard img="./colleges.svg" title="Colleges" />
           </div>
-          <div>
-            <HeroCard img="./universities.svg" title="Universities" />
-          </div>
-        </div> */}
-        <div className="p-4 space-y-4">
-        <div>
-            <HeroCard img="./high_schools.svg" title="High Schools" />
-          </div>
-          <div>
-            <HeroCard img="./colleges.svg" title="Colleges" />
-          </div>
-          <div>
+          <div className="flex-1">
             <HeroCard img="./universities.svg" title="Universities" />
           </div>
         </div>
