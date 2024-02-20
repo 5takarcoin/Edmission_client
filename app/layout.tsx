@@ -26,7 +26,7 @@ export default function RootLayout({
             <nav>
               <Navbar />
             </nav>
-            <div className="w-full p-4 lg:max-w-[60%] lg:w-[1200px] m-auto">
+            <div className="w-full p-4 lg:p-0 lg:max-w-[60%] lg:w-[1200px] m-auto">
               <main>{children}</main>
             </div>
             <Footer />

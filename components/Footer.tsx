@@ -31,7 +31,7 @@ export default function Footer() {
     //   </div>
     // </div>
 
-    <div className="bg-ed-white p-12 md:p-24">
+    <div className="bg-ed-white p-12 md:p-24 lg:flex">
       <div className="space-y-8 flex-1 pb-12">
         <div className="h-4">
           <img className="h-8" src="./edmission.svg" alt="" />

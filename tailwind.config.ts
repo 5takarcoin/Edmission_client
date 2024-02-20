@@ -8,6 +8,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      screens: {
+        'lg': '1260px',
+      },
       colors: {
         "ed-text": "#112206",
         "ed-prim": "#c84771",

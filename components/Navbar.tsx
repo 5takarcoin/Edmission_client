@@ -35,7 +35,7 @@ export default function Navbar() {
   return (
     
 
-    <div className="h-20 flex items-center justify-between p-4">
+    <div className="h-20 lg:max-w-[80%] m-auto flex items-center justify-between p-4">
       <div>
         <img className="h-8" src="./edmission.svg" alt="" />
       </div>
@@ -63,10 +63,36 @@ export default function Navbar() {
           </svg>
         </button>
 
+        <div className="hidden lg:flex gap-8 items-center">
+          {links.map((link, i) => {
+            return (
+              <div key={i}>
+                <Link
+                  onClick={() => {
+                    setMenuOpen(false);
+                    document.body.classList.remove("hide-scroll");
+                  }}
+                  href={link.link}
+                  className="hover:text-ed-white"
+                >
+                  {link.title}
+                </Link>
+              </div>
+            );
+          })}
+          <div className="flex items-center justify-end">
+                <Link
+                  href="/login"
+                  className="border-2 border-ed-prim text-ed-prim hover:text-white hover:bg-ed-prim px-8 py-2 rounded-md"
+                >
+                  Login
+                </Link>
+              </div>
+          </div>
         <div
           className={`${
             !menuOpen && "hidden"
-          } flex justify-end w-[100vw] h-[100vh] bg-black bg-opacity-40 absolute top-0 right-0`}
+          } lg:hidden flex justify-end w-[100vw] h-[100vh] bg-black bg-opacity-40 absolute top-0 right-0`}
         >
           <div
             className={`relative h-full bg-ed-prim w-[75%] text-white flex items-center`}
