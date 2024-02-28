@@ -1,15 +1,47 @@
 "use client";
 
+import { useState } from "react";
 import SideBarCheckboxGroup from "./SidebarCheckboxGroup";
 import SidebarDropdown from "./SidebarDropdown";
 import SidebarSlider from "./SidebarSlider";
+import { CheckboxState } from "@/types/CheckBoxTypes";
+import { IoHelpCircle } from "react-icons/io5";
 
 export default function Sidebar() {
+  const [selectivityCheckboxes, setSelectivityCheckboxes] = useState<
+    CheckboxState[]
+  >([
+    { name: "Extremely Selective", option: false },
+    { name: "Very Selective", option: false },
+    { name: "Selective", option: false },
+    { name: "Not Selective", option: false },
+  ]);
+
+  const [quotaCheckboxes, setQuotaCheckboxes] = useState<CheckboxState[]>([
+    { name: "Freedom Fighter", option: false },
+    { name: "Minority", option: false },
+    { name: "Others", option: false },
+  ]);
+
+  const [programsCheckboxes, setProgramsCheckboxes] = useState<CheckboxState[]>(
+    [
+      { name: "Online Programs", option: false },
+      { name: "Evening Degree Programs", option: false },
+    ]
+  );
+
+  const [scholarshipCheckboxes, setScholarshipCheckboxes] = useState<
+    CheckboxState[]
+  >([{ name: "Schoralships Availability", option: false }]);
+
+  const [housingCheckboxes, setHousingCheckboxes] = useState<CheckboxState[]>([
+    { name: "Student's Housing Availability", option: false },
+  ]);
+
   return (
-    <div className="max-w-96 p-6 bg-red-200 border-2 border-solid border-blue-400 rounded-lg">
+    <div className="max-w-96 p-6 bg-red-100 rounded-md">
       <div className="space-y-4">
         {/* <SearchAndLocation /> */}
-
 
         <div className="relative flex items-center justify-center bg-white border border-gray-300 rounded shadow">
           <input
@@ -19,7 +51,9 @@ export default function Sidebar() {
             id="location"
             name="location"
           />
-          <div className="absolute right-4  "><img src="./magni.svg" alt="" /></div>
+          <div className="absolute right-4  ">
+            <img src="./magni.svg" alt="" />
+          </div>
         </div>
 
         <hr className="w-[60%] m-auto" />
@@ -37,35 +71,66 @@ export default function Sidebar() {
 
         <SidebarDropdown
           name={"University Type"}
-          options={["public", "private", "national"]}
+          options={["Public", "Private", "National"]}
         />
         <SidebarDropdown
           name={"University Genre"}
-          options={["eng", "medi", "gen"]}
+          options={["Engineering", "Medical", "General"]}
         />
 
         <hr className="w-[60%] mx-auto" />
-        <SidebarDropdown name={"Exam System"} options={["no", "auto", "gs"]} />
+        <SidebarDropdown
+          name={"Exam System"}
+          options={["No Exams", "auto", "gs"]}
+        />
 
-        <SideBarCheckboxGroup />
-        <SideBarCheckboxGroup />
-        <hr className="w-[60%] m-auto py-4" />
-        <SideBarCheckboxGroup />
-        <hr className="w-[60%] m-auto py-4" />
-        <SidebarSlider min={4} minText="8" max={8}  maxText="haha"/>
+        <SideBarCheckboxGroup
+          checkboxes={selectivityCheckboxes}
+          setCheckboxes={setSelectivityCheckboxes}
+        >
+          <div className="flex items-center gap-1 pt-4 pb-2">
+            <p className="text-md font-semibold">
+              Selectivity
+            </p>
+              <p className="text-xl">
+                <IoHelpCircle />
+              </p>
+          </div>
+        </SideBarCheckboxGroup>npm run e
+        <SideBarCheckboxGroup
+          checkboxes={quotaCheckboxes}
+          setCheckboxes={setQuotaCheckboxes}
+        >
+            <p className="text-md items-center font-semibold">
+              Quota
+            </p>
+        </SideBarCheckboxGroup>
+        <div className="w-[7C0%] m-auto py-4"><p className="h-[2px] bg-ed-sec"></p></div>
+        <SideBarCheckboxGroup
+          checkboxes={programsCheckboxes}
+          setCheckboxes={setProgramsCheckboxes}
+        />
+        <div className="w-[7C0%] m-auto py-4"><p className="h-[2px] bg-ed-sec"></p></div>
+        <SidebarSlider min={4} minText="8" max={8} maxText="haha" />
 
-        <SideBarCheckboxGroup />
-        <hr className="w-[60%] m-auto py-4" />
+        <SideBarCheckboxGroup
+          checkboxes={scholarshipCheckboxes}
+          setCheckboxes={setScholarshipCheckboxes}
+        />
+        <div className="w-[7C0%] m-auto py-4"><p className="h-[2px] bg-ed-sec"></p></div>
 
-        <SideBarCheckboxGroup />
+        <SideBarCheckboxGroup
+          checkboxes={housingCheckboxes}
+          setCheckboxes={setHousingCheckboxes}
+        />
 
         <SidebarDropdown
           name={"Campus Setting"}
           options={["urban/rural/sub", "urban", "rural", "sub"]}
         />
 
-        <SidebarSlider min={1} minText="8" max={10} maxText="haha"/>
-        <SidebarSlider min={4} minText="8" max={8} maxText="haha"/>
+        <SidebarSlider min={1} minText="8" max={10} maxText="haha" />
+        <SidebarSlider min={4} minText="8" max={8} maxText="haha" />
       </div>
     </div>
   );

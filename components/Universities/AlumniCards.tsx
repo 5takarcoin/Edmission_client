@@ -4,7 +4,8 @@ function AlumniCards() {
   return (
     <div className="">
       <h3 className="py-4 px-2 text-xl font-bold">Notable Alumnis</h3>
-      <div className="grid grid-cols-2 gap-4">
+      {/* <div className="grid grid-cols-2 gap-4"> */}
+      <div className="flex flex-wrap gap-4">
         <AlumniCard />
         <AlumniCard />
         <AlumniCard />

@@ -1,18 +1,10 @@
 import { useState } from "react";
 import SingleCheckBox from "./SingleCheckBox";
+import { CheckboxState } from "@/types/CheckBoxTypes";
 
-type CheckboxState = {
-  name: string;
-  option: boolean;
-};
 
-const SideBarCheckboxGroup: React.FC = () => {
-  const [checkboxes, setCheckboxes] = useState<CheckboxState[]>([
-    { name: "coolname1", option: false },
-    { name: "coolname2", option: false },
-    { name: "coolname3", option: false },
-  ]);
-
+const SideBarCheckboxGroup = ({checkboxes, setCheckboxes, children}: {checkboxes: CheckboxState[], setCheckboxes: React.Dispatch<React.SetStateAction<CheckboxState[]>>, children?: React.ReactNode }) => {
+  
   const handleCheckboxChange = (i: number) => {
     const temp = [...checkboxes];
     temp[i].option = !temp[i].option;
@@ -21,7 +13,7 @@ const SideBarCheckboxGroup: React.FC = () => {
 
   return (
     <div>
-      <label className="text-md">Choose options:</label>
+      <label className="text-md">{children}</label>
       {checkboxes.map((checkbox, i) => {
         return (
           <div key={i} className="py-2">

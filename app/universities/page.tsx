@@ -50,7 +50,7 @@ const customUni: University[] = [
 export default function page() {
   return (
     <div className="">
-      <div className="">
+      <div className="py-8">
         <h1 className="text-3xl font-bold">Explore Universities</h1>
         <p className="text-md py-4">
           Search Through over 1,250 universities all around the world. Or take
@@ -58,7 +58,7 @@ export default function page() {
         </p>
       </div>
 
-      <div className="flex flex-col gap-4 lg:flex-row">
+      <div className="flex flex-col gap-4 lg:flex-row pb-8">
         <div className="hidden lg:block lg:flex-1">
           <Sidebar />
         </div>
