@@ -1,6 +1,6 @@
 "use client"
 
-import { collectGenerateParams } from "next/dist/build/utils"
+import InputField from "@/components/Organizer/InputField"
 import { useRouter } from "next/navigation"
 import { useState } from "react"
 
@@ -49,27 +49,20 @@ export default function Signup() {
 
 
   return (
-    <div className="flex items-center justify-center h-screen">
-        <div className="flex-col border-2 border-gray-600 p-8 w-1/4 rounded-xl">
-          <h1 className="block text-2xl mb-8">Signup</h1>
+    <div className="flex text-ed-text items-center justify-center min-h-[600px]">
+    <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl">
+      <h1 className="block text-2xl mb-8 font-bold">Sign Up</h1>
           <form className="" onSubmit={handleSubmit}>
+            <InputField id="signup_name" value={name} setValue={setName} >Name</InputField>
+            <InputField id="signup_username" value={username} setValue={setUsername} >Username</InputField>
+            <InputField id="signup_password" value={password} setValue={setPassword} isPassword={true}>Password</InputField>
             <div className="mb-5">
-              <label htmlFor="name" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Name</label>
-              <input onChange={e => setName(e.target.value)} type="text" value={name} id="name" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
+              <div className="my-4">{image ? <img src={URL.createObjectURL(image)} alt="" /> : <p>No image selected</p>}</div>
+              <label htmlFor="image" className="mb-2 text-ed-text text-sm bg-white rounded-md border border-ed-sec font-medium h-10 w-full flex justify-center  items-center text-center"><span>{image ? "Change avatar" : "Choose your avatar"}</span></label>
+              <input onChange={e => setImage(e.target.files ? e.target.files[0] : null)} type="file" id="image" className="hidden"/>
             </div>
-            <div className="mb-5">
-              <label htmlFor="username" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Username</label>
-              <input onChange={e => setUsername(e.target.value)} type="text" value={username} id="username" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
-            <div className="mb-5">
-              <label htmlFor="password" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Password</label>
-              <input onChange={e => setPassword(e.target.value)} type="password" value={password} id="password" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
-            <div className="mb-5">
-              <label htmlFor="image" className="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Image</label>
-              <input onChange={e => setImage(e.target.files ? e.target.files[0] : null)} type="file" id="image" className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"/>
-            </div>
-            <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Signup</button>
+            <button type="submit" className="text-ed-text bg-white hover:bg-ed-sec hover:text-white border-solid border-2 border-ed-sec font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center ">Sign Up</button>
+          
           </form>
           </div>
         </div>

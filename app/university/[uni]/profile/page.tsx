@@ -1,15 +1,13 @@
-"use client"
-
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AlumniCards from "@/components/Universities/AlumniCards";
 import UniCatCards from "@/components/Universities/Categories/UniCatCards";
 import UniReviews from "@/components/Universities/Categories/UniReviews";
+import UniEditableCatCards from "@/components/Universities/EditableCats/UniEditableCatCards";
 import UniHero from "@/components/Universities/UniHero";
 import UniNav from "@/components/Universities/UniNav";
 import UniSearchCard from "@/components/Universities/UniSearchCard";
 import { Reviews } from "@/types/CategoryTypes";
 import { University } from "@/types/UniversityTypes";
-import { useEffect, useState } from "react";
 
 // const uni: University = {
 //   name: "Name",
@@ -25,28 +23,7 @@ import { useEffect, useState } from "react";
 //   identifier: "buta"
 // }
 
-
-export default function page({params}:{params: any}) {
-  const [data, setData] = useState<University[]>([] as University[]);
-  
-  useEffect(() => {
-    console.log("Bruh")
-    console.log(params)
-    async function fetchData() {
-      try {
-        const response = await fetch(`http://localhost:5050/api/unis/${params.uni}`);
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
+export default function page() {
 
   const reviews: Reviews[] = [
     {
@@ -69,9 +46,9 @@ export default function page({params}:{params: any}) {
   return (
     <div className="space-y-8">
       <div className="">
-        {data ? <UniHero uni={data[0]}/> : <p>Loading...</p>}
+        {/* {<UniHero uni={uni}/> */}
         {/* <UniNav /> */}
-        <UniCatCards />
+        <UniEditableCatCards />
         <UniReviews reviews={reviews}/>
         <AlumniCards />
         <div className="h-4"></div>

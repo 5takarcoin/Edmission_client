@@ -1,12 +1,15 @@
 import { FaStar } from "react-icons/fa";
 import UniCatCard from "./UniCatCard";
 import UniAboutCard from "./UniAboutCard";
-import { AboutUni, AdmissionUni, AfterGrad, DetailsUni, CampusUni } from "@/types/CategoryTypes";
+import { AboutUni, AdmissionUni, AfterGrad, DetailsUni, CampusUni, SubMajor, ECA, Custom } from "@/types/CategoryTypes";
 import UniRankingCard from "./UniRankingCard";
 import UniAdmissionCard from "./UniAdmissionCard";
 import UniDetailsCard from "./UniDetailsCard";
 import LifeAfterGradCard from "./LifeAfterGradCard";
 import UniCampusInfo from "./UniCampusInfoCard";
+import UniSubMajorCard from "./UniSubjectMajorCard";
+import UniECACard from "./UniECACard";
+import UniCustomCard from "./UniCustomCard";
 
 function UniCatCards() {
 
@@ -46,6 +49,41 @@ function UniCatCards() {
     housing: "Yes"
   }
 
+  const subMaj: SubMajor[] = [
+    {
+      submaj: "Computer Science & Engineering",
+      seats: 150,
+      profs: 17,
+      lects: 9,
+      creds: 80,
+      estlow: 2500000,
+      esthigh: 2750000,
+      syl: "Click Here"
+    },
+    {
+      submaj: "Computer Science & Engineering",
+      seats: 150,
+      profs: 17,
+      lects: 9,
+      creds: 80,
+      estlow: 2500000,
+      esthigh: 2750000,
+      syl: "Click Here"
+    }
+  ]
+
+  const eca: ECA = {
+    club: 26,
+    clubs: ["BUET IT CLUB", "BUET Career Club", "BUET Business Club", "BUET Debating Club"]
+  }
+
+  const custom : Custom[] = [
+    {
+      title: "Custom Title",
+      desc: "<> text </>"
+    }
+  ]
+
   return (
     <div className="flex flex-col flex-wrap justify-between">
       <UniAboutCard aboutUni={aboutUni} />
@@ -54,6 +92,9 @@ function UniCatCards() {
       <UniDetailsCard detailsUni={detailsUni} />
       <UniCampusInfo campusInfo={campusUni} />
       <LifeAfterGradCard afterGrad={afterGrad} />
+      <UniSubMajorCard subMaj={subMaj}/>
+      <UniECACard ecaopp={eca} />
+      <UniCustomCard custom={custom} title="Custom 1" />
     </div>
   );
 }

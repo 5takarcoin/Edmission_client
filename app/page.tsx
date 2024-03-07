@@ -1,6 +1,6 @@
 import Features from "@/components/Hero/Features";
 import Hero from "@/components/Hero/Hero";
-import NotSure from "@/components/NotSure";
+import NotSure from "@/components/Organizer/NotSure";
 
 export default function Home() {
   return (

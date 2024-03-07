@@ -4,7 +4,7 @@ type DetailsType = {
   value: string;
 };
 
-export default function DetailCar({ details }: { details: DetailsType[] }) {
+export default function DetailCard({ details }: { details: DetailsType[] }) {
   return (
     <div>
       {details.map((detail) => (

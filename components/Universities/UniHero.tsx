@@ -3,15 +3,18 @@ import { FaStar } from "react-icons/fa";
 import { GoLocation } from "react-icons/go";
 
 export default function UniHero({ uni }: { uni: University }) {
+
+  console.log("Ekhan theke")
+  console.log(uni)
   return (
     <div className="flex flex-col lg:flex-row gap-4 px-2 md:px-12">
       <div className="flex-col space-y-8 flex-[2]">
         <div className="flex items-center">
           <div className="h-32 w-32">
-            <img className="" src={"/" + uni.logo} alt={`${uni.name} university logo`} />
+            {/* <img className="" src={"/" + uni.logo} alt={`${uni.name} university logo`} /> */}
           </div>
           <div className="space-y-4 p-4">
-            <h2 className="text-4xl font-bold">{uni.name}</h2>
+            <h2 className="text-4xl font-bold">{uni.name} Showww</h2>
             <p className="flex flex-col gap-2">
               <span className="flex items-center gap-2">
                 <span>
@@ -23,20 +26,20 @@ export default function UniHero({ uni }: { uni: University }) {
                 <span>
                   <FaStar />
                 </span>
-                <span>{`${uni.stars} (${uni.totalReviews})`}</span>
+                {/* <span>{`${uni.stars} (${uni.totalReviews})`}</span> */}
               </span>
             </p>
           </div>
         </div>
         <div className="text-md ">
-          <p>{uni.description}</p>
+          <p>{uni.desc}</p>
         </div>
       </div>
       <div className="flex-1">
         <div className="h-full pt-4 flex items-center justify-center">
           <img
             className="w-full h-full md:h-80 object-cover rounded-lg"
-            src={"/" + uni.image}
+            src={uni.img}
             alt=""
           />
         </div>

@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import { useAppSelector } from "@/store/store";
 import { RxCross1 } from "react-icons/rx";
+import Logout from "@/components/Organizer/Logout";
 
 export default function Navbar() {
   const user = useAppSelector((state) => state.user);
@@ -33,8 +34,6 @@ export default function Navbar() {
   ];
 
   return (
-    
-
     <div className="h-20 lg:max-w-[80%] m-auto flex items-center justify-between p-4">
       <div>
         <img className="h-8" src="./edmission.svg" alt="" />
@@ -64,6 +63,18 @@ export default function Navbar() {
         </button>
 
         <div className="hidden lg:flex gap-8 items-center">
+          {user.name && (
+            <div>
+              <div className="flex gap-4 text-xl items-center">
+                <h3>{user.name}</h3>
+                <img
+                  className=" h-12 w-12 object-cover rounded-full"
+                  src={user.image}
+                  alt=""
+                />
+              </div>
+            </div>
+          )}
           {links.map((link, i) => {
             return (
               <div key={i}>
@@ -81,14 +92,22 @@ export default function Navbar() {
             );
           })}
           <div className="flex items-center justify-end">
-                <Link
-                  href="/login"
-                  className="border-2 border-ed-prim text-ed-prim hover:text-white hover:bg-ed-prim px-8 py-2 rounded-md"
-                >
-                  Login
-                </Link>
-              </div>
+            {user.name ? (
+              <Logout />
+            ) : (
+              <Link
+                onClick={() => {
+                    setMenuOpen(false);
+                    document.body.classList.remove("hide-scroll");
+                  }}
+                href="/login"
+                className="border-2 border-ed-prim text-ed-prim hover:text-white hover:bg-ed-prim px-8 py-2 rounded-md"
+              >
+                Login
+              </Link>
+            )}
           </div>
+        </div>
         <div
           className={`${
             !menuOpen && "hidden"
@@ -108,6 +127,18 @@ export default function Navbar() {
             </div>
 
             <div className="h-[40%] w-[85%] flex-col flex justify-around">
+              {user.name && (
+                <div className="flex items-center justify-end">
+                  <div className="flex gap-4 text-xl items-center">
+                    <h3>{user.name}</h3>
+                    <img
+                      className=" h-12 w-12 object-cover rounded-full"
+                      src={user.image}
+                      alt=""
+                    />
+                  </div>
+                </div>
+              )}
               {links.map((link, i) => {
                 return (
                   <div key={i} className="flex items-center justify-end">
@@ -124,14 +155,21 @@ export default function Navbar() {
                   </div>
                 );
               })}
-
               <div className="flex items-center justify-end">
-                <Link
-                  href="/login"
-                  className="border-2 border-ed-white text-white hover:text-ed-prim hover:bg-ed-white px-8 py-2 rounded-md"
-                >
-                  Login
-                </Link>
+                {user.name ? (
+                  <Logout />
+                ) : (
+                  <Link
+                    onClick={() => {
+                      setMenuOpen(false);
+                      document.body.classList.remove("hide-scroll");
+                    }}
+                    href="/login"
+                    className="border-2 border-ed-white text-white hover:text-ed-prim hover:bg-ed-white px-8 py-2 rounded-md"
+                  >
+                    Login
+                  </Link>
+                )}
               </div>
             </div>
           </div>

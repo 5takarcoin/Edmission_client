@@ -10,7 +10,7 @@ type UserType = {
 
 type LoginType = "Student" | "University" | "Admin";
 
-export default function Signup() {
+export default function UniEditableCatCards() {
   const router = useRouter();
 
   const [name, setName] = useState("");
@@ -35,7 +35,7 @@ export default function Signup() {
     formData.append("name", name);
     formData.append("username", username);
     formData.append("password", password);
-    formData.append("accType", selectedLoginType);
+    formData.append("loginType", selectedLoginType);
     // if (image) formData.append("image", image);
     // console.log(formData);
 
@@ -62,6 +62,10 @@ export default function Signup() {
           <InputField id="signup_name" value={name} setValue={setName}>
             Name
           </InputField>
+          <div className="mb-5">
+              <label htmlFor={"edit_name"} className="block mb-2 text-sm font-medium">Name</label>
+              <input onChange={e => setName(e.target.value)} type="text" value={name} id={"edit_name"} className="bg-white border border-gray-300 text-ed-text text-sm rounded-md block w-full p-2 focus:outline-none"/>
+            </div>
           <InputField
             id="signup_username"
             value={username}
