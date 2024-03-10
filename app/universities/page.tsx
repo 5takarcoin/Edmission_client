@@ -70,6 +70,7 @@ export default function page() {
 
     fetchData();
   }, []);
+  
   return (
     <div className="">
       <div className="py-8">

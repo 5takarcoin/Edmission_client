@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AlumniCards from "@/components/Universities/AlumniCards";
@@ -9,6 +9,7 @@ import UniNav from "@/components/Universities/UniNav";
 import UniSearchCard from "@/components/Universities/UniSearchCard";
 import { Reviews } from "@/types/CategoryTypes";
 import { University } from "@/types/UniversityTypes";
+import Link from "next/link";
 import { useEffect, useState } from "react";
 
 // const uni: University = {
@@ -25,23 +26,27 @@ import { useEffect, useState } from "react";
 //   identifier: "buta"
 // }
 
-
-export default function page({params}:{params: any}) {
+export default function page({ params }: { params: any }) {
   const [data, setData] = useState<University[]>([] as University[]);
-  
+  const [uniId, setUniId] = useState<string>("Fafsa")
+
   useEffect(() => {
-    console.log("Bruh")
-    console.log(params)
+    console.log("Bruh");
+    console.log(params);
     async function fetchData() {
       try {
-        const response = await fetch(`http://localhost:5050/api/unis/${params.uni}`);
+        const response = await fetch(
+          `http://localhost:5050/api/unis/${params.uni}`
+        );
         if (!response.ok) {
-          throw new Error('Network response was not ok');
+          throw new Error("Network response was not ok");
         }
         const jsonData = await response.json();
         setData(jsonData);
+        setUniId(jsonData._id)
+        console.log(uniId)
       } catch (error) {
-        console.error('Error fetching data:', error);
+        console.error("Error fetching data:", error);
       }
     }
 
@@ -54,26 +59,34 @@ export default function page({params}:{params: any}) {
       from: "Alumni (CSE)",
       date: "July 20, 2024",
       stars: 4,
-      review: "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately."
+      review:
+        "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately.",
     },
     {
       recommended: false,
       from: "Senior (EEE)",
       date: "July 20, 2024",
       stars: 3,
-      review: "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consider BUET a top 10 university in Bangladesh."
-    }
-  ]
-
+      review:
+        "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consider BUET a top 10 university in Bangladesh.",
+    },
+  ];
 
   return (
     <div className="space-y-8">
       <div className="">
-        {data ? <UniHero uni={data[0]}/> : <p>Loading...</p>}
-        {/* <UniNav /> */}
-        <UniCatCards />
-        <UniReviews reviews={reviews}/>
-        <AlumniCards />
+        <Link className="h-48 w-full bg-blue-500" href={"/update_uni"}>{uniId}</Link>
+        {data[0] ? (
+          <div>
+            <UniHero uni={data[0]} />
+            {/* <UniNav /> */}
+            <UniCatCards uni={data[0]}/>
+            <UniReviews reviews={reviews} />
+            <AlumniCards />
+          </div>
+        ) : (
+          <p>Loading...</p>
+        )}
         <div className="h-4"></div>
       </div>
     </div>

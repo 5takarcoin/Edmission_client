@@ -5,7 +5,7 @@ import Logout from "@/components/Organizer/Logout";
 import { AppDispatch, useAppSelector } from "@/store/store";
 import { login } from "@/store/userSlice";
 import { User } from "@/types/UserType";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 type UserType = {
@@ -50,6 +50,7 @@ export default function Login() {
       dispatch(login(theUser))
     }
   }
+  
 
   return (
     <div className="flex flex-col text-ed-text items-center justify-center min-h-[600px]">

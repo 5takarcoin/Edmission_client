@@ -10,91 +10,76 @@ import UniCampusInfo from "./UniCampusInfoCard";
 import UniSubMajorCard from "./UniSubjectMajorCard";
 import UniECACard from "./UniECACard";
 import UniCustomCard from "./UniCustomCard";
+import { Ranking, Rankings, University } from "@/types/UniversityTypes";
 
-function UniCatCards() {
+function UniCatCards({ uni }: { uni: University }) {
+
+  
+  console.log("Baal theke")
+  console.log(uni)
 
   const aboutUni: AboutUni = {
-    link: "www.buet.ac.bd",
-    location: "Keranigonj, Dhaka - 1000, Bangladesh",
-    type: "Public",
-    genre: "Engineering",
-    credit: "Closed",
-    fees: 20000
+    link: uni.about.website,
+    location: uni.about.location,
+    type: uni.about.unitype,
+    genre: uni.about.unigenre,
+    credit: uni.about.creditsystem,
+    fees: uni.about.tutionfee
   }
 
   const admissionUni: AdmissionUni = {
-    acceptance: 4,
-    examsys: "Autonomous",
-    selection: "Shortlist > Preliminary Exam > Written Exam",
-    quota: "Yes",
-    scholarship: "Available"
+    acceptance: uni.admission_details.acceptancerate,
+    examsys: uni.admission_details.examsystem,
+    selection: uni.admission_details.selectionprocedure,
+    quota: uni.admission_details.quota.toString(),
+    scholarship: uni.admission_details.scholarship
   }
 
   const detailsUni: DetailsUni = {
-    website: "www.buet.ac.bd/ug_admissions",
-    deadline: "10/08/2023",
-    fee: "KA - Preliminary 400 + Main 600 and KHA - Preliminary 400 + Main 800",
-    requirements: "GPA 5, PCM 560+"
+    website: uni.application_details.website,
+    deadline: uni.application_details.deadline,
+    fee: uni.application_details.fee,
+    requirements: uni.application_details.requirements
   }
 
   const afterGrad: AfterGrad = {
-    time: "4 Years",
-    salary: 37500,
-    ratio: "1000:979"
+    time: uni.life_after_graduation.gradtime.toString(),
+    salary: uni.life_after_graduation.salary,
+    ratio: uni.life_after_graduation.employment
   }
 
   const campusUni: CampusUni = {
-    setting: "Urban",
-    permanent: "Yes",
-    housing: "Yes"
+    setting: uni.campus_info.campus,
+    permanent: uni.campus_info.permanent.toString(),
+    housing: uni.campus_info.housing.toString()
   }
 
-  const subMaj: SubMajor[] = [
-    {
-      submaj: "Computer Science & Engineering",
-      seats: 150,
-      profs: 17,
-      lects: 9,
-      creds: 80,
-      estlow: 2500000,
-      esthigh: 2750000,
-      syl: "Click Here"
-    },
-    {
-      submaj: "Computer Science & Engineering",
-      seats: 150,
-      profs: 17,
-      lects: 9,
-      creds: 80,
-      estlow: 2500000,
-      esthigh: 2750000,
-      syl: "Click Here"
-    }
-  ]
+  const subMaj: SubMajor[] = uni.subject_majors;
 
   const eca: ECA = {
-    club: 26,
-    clubs: ["BUET IT CLUB", "BUET Career Club", "BUET Business Club", "BUET Debating Club"]
+    club: uni.eca_opportunity.total_clubs,
+    clubs: uni.eca_opportunity.clubs
   }
 
-  const custom : Custom[] = [
-    {
-      title: "Custom Title",
-      desc: "<> text </>"
-    }
-  ]
+  const rankings: Rankings = uni.rankings;
+  // const custom : Custom[] = [
+  //   {
+  //     title: "Custom Title",
+  //     desc: "<> text </>"
+  //   }
+  // ]
 
   return (
     <div className="flex flex-col flex-wrap justify-between">
       <UniAboutCard aboutUni={aboutUni} />
-      <UniRankingCard aboutUni={aboutUni} />
+      <UniRankingCard rankings={rankings}/>
       <UniAdmissionCard admissionUni={admissionUni} />
       <UniDetailsCard detailsUni={detailsUni} />
       <UniCampusInfo campusInfo={campusUni} />
       <LifeAfterGradCard afterGrad={afterGrad} />
       <UniSubMajorCard subMaj={subMaj}/>
       <UniECACard ecaopp={eca} />
-      <UniCustomCard custom={custom} title="Custom 1" />
+      {/* <UniCustomCard custom={custom} title="Custom 1" /> */}
     </div>
   );
 }

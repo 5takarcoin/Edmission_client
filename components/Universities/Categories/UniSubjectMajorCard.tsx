@@ -7,7 +7,7 @@ function UniSubMajorCard({ subMaj }: { subMaj: SubMajor[] }) {
       <div className="">
         <h3 className="text-lg font-bold p-2 pt-4">Subject & Majors</h3>
         <div className="bg-ed-card rounded-xl overflow-hidden">
-          <div className="overflow-x-scroll w-[90%]">
+          <div className="overflow-x-scroll w-full">
             <div className="min-w-[900px]">
               <p className="flex bg-ed-prim h-12">
                 <span className="text-xs text-white flex justify-center items-center h-full text-center w-3/12">

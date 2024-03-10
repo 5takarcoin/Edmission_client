@@ -1,76 +1,82 @@
-"use client";
-
 import CheckBoxField from "@/components/Organizer/CheckBoxField";
 import InputField from "@/components/Organizer/InputField";
 import NumberField from "@/components/Organizer/NumberField";
 import { SubMajor } from "@/types/CategoryTypes";
-import { QuotaList, ScholarshipList } from "@/types/UniversityTypes";
+import {
+  QuotaList,
+  Ranking,
+  ScholarshipList,
+  Subnmajor,
+  University,
+} from "@/types/UniversityTypes";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-type UserType = {
-  name: string;
-};
+export default function UpdateUni({ uni }: { uni: University }) {
 
-type LoginType = "Student" | "University" | "Admin";
-
-export default function Signup() {
+console.log("ayhayayya")
+console.log(uni)
   const router = useRouter();
 
-  const [name, setName] = useState("");
-  const [identifier, setIdentifier] = useState("");
-  const [location, setLocation] = useState("");
+  const [name, setName] = useState(uni.name);
+  const [identifier, setIdentifier] = useState(uni.identifier);
+  const [location, setLocation] = useState(uni.location);
   const [image, setImage] = useState<null | File>(null);
 
-  const [description, setDescription] = useState("");
+  const [description, setDescription] = useState(uni.desc);
 
   // About -> No dropdown yet
-  const [uniType, setUniType] = useState("Public");
-  const [uniGenre, setUniGenre] = useState("Other");
-  const [uniCreditSys, setUniCreditSys] = useState("Closed");
-  const [uniTutionFees, setUniTutionFees] = useState(0);
+  const [uniType, setUniType] = useState(uni.about.unitype as string);
+  const [uniGenre, setUniGenre] = useState(uni.about.unigenre as string);
+  const [uniCreditSys, setUniCreditSys] = useState(uni.about.creditsystem as string);
+  const [uniTutionFees, setUniTutionFees] = useState(uni.about.tutionfee);
 
   // Rankings ->
-  const [uniQSPos, setUniQSPos] = useState("");
-  const [uniQSRank, setUniQSRank] = useState("");
-  const [uniTHEPos, setUniTHEPos] = useState("");
-  const [uniTHERank, setUniTHERank] = useState("");
+  const ranks = uni.rankings;
+  const [uniQSPos, setUniQSPos] = useState(ranks.qs[0].position);
+  const [uniQSRank, setUniQSRank] = useState(ranks.qs[0].ranking);
+  const [uniTHEPos, setUniTHEPos] = useState(ranks.the[0].position);
+  const [uniTHERank, setUniTHERank] = useState(ranks.the[0].ranking);
 
   // Admision Details
-  const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(0);
-  const [uniAdmissionExamSystem, setUniAdmissionExamSystem] = useState("No exams");
-  const [uniAdmissionSelectionPro, setUniAdmissionSelectionPro] = useState("");
-  const [uniAdmissionQuota, setUniAdmissionQuota] = useState(false);
-  const [uniAdmissionScholarship, setUniAdmissionScholarship] = useState(false);
+  const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(uni.admission_details.acceptancerate);
+  const [uniAdmissionExamSystem, setUniAdmissionExamSystem] = useState(uni.admission_details.examsystem as string);
+  const [uniAdmissionSelectionPro, setUniAdmissionSelectionPro] = useState(uni.admission_details.selectionprocedure);
+  const [uniAdmissionQuota, setUniAdmissionQuota] = useState(uni.admission_details.quota);
+  const [uniAdmissionScholarship, setUniAdmissionScholarship] = useState(uni.admission_details.scholarship);
 
   // Application Details
-  const [uniApplicationWebsite, setUniApplicationWebsite] = useState("");
-  const [uniApplicationDeadline, setUniApplicationDeadline] = useState("");
-  const [uniApplicationFees, setUniApplicationFees] = useState("");
+  const [uniApplicationWebsite, setUniApplicationWebsite] = useState(uni.application_details.website);
+  const [uniApplicationDeadline, setUniApplicationDeadline] = useState(uni.application_details.deadline);
+  const [uniApplicationFees, setUniApplicationFees] = useState(uni.application_details.fee);
   const [uniApplicationRequirements, setUniApplicationRequirements] =
-    useState("");
+    useState(uni.application_details.requirements);
 
   // Subject and Majors
-  const [uniSubAndMajors, setUniSubAndMajors] = useState([] as SubMajor[]);
+  const [uniSubAndMajors, setUniSubAndMajors] = useState(uni.subject_majors);
+  const oneSubMaj = {} as Subnmajor;
+  if (uniSubAndMajors.length > 0) uniSubAndMajors[0];
 
-  const [uniSabAndMajSubMaj, setUniSubAndMajSubMaj] = useState("");
-  const [uniSabAndMajSeats, setUniSubAndMajSeats] = useState(0);
-  const [uniSabAndMajProfs, setUniSubAndMajProfs] = useState(0);
-  const [uniSabAndMajLects, setUniSubAndMajLects] = useState(0);
-  const [uniSabAndMajCreds, setUniSubAndMajCreds] = useState(0);
-  const [uniSabAndMajEstLow, setUniSubAndMajEstLow] = useState(0);
-  const [uniSabAndMajEstHigh, setUniSubAndMajEstHigh] = useState(0);
-  const [uniSabAndMajSyllabus, setUniSubAndMajSyllabus] = useState("");
+  const [uniSabAndMajSubMaj, setUniSubAndMajSubMaj] = useState(oneSubMaj.submaj);
+  const [uniSabAndMajSeats, setUniSubAndMajSeats] = useState(oneSubMaj.seats);
+  const [uniSabAndMajProfs, setUniSubAndMajProfs] = useState(oneSubMaj.profs);
+  const [uniSabAndMajLects, setUniSubAndMajLects] = useState(oneSubMaj.lects);
+  const [uniSabAndMajCreds, setUniSubAndMajCreds] = useState(oneSubMaj.creds);
+  const [uniSabAndMajEstLow, setUniSubAndMajEstLow] = useState(oneSubMaj.estlow);
+  const [uniSabAndMajEstHigh, setUniSubAndMajEstHigh] = useState(oneSubMaj.esthigh);
+  const [uniSabAndMajSyllabus, setUniSubAndMajSyllabus] = useState(oneSubMaj.syl);
 
   // Quota List
-  const [uniQuotaList, seUniQuotaList] = useState([] as QuotaList[]);
+  const [uniQuotaList, setUniQuotaList] = useState(uni.quota_list);
+  const oneQuota = {} as QuotaList;
+  if (uniQuotaList.length > 0) uniQuotaList[0];
 
-  const [uniQuotaName, setUniQuotaName] = useState("");
-  const [uniQuotaRequirements, setUniQuotaRequirements] = useState("");
-  const [uniQuotaDetails, setUniQuotaDetails] = useState("");
+  const [uniQuotaName, setUniQuotaName] = useState(oneQuota.name);
+  const [uniQuotaRequirements, setUniQuotaRequirements] = useState(oneQuota.requirements);
+  const [uniQuotaDetails, setUniQuotaDetails] = useState(oneQuota.details);
 
   // Scholarship List
-  const [uniScholarshipList, seUniScholarshipList] = useState(
+  const [uniScholarshipList, setUniScholarshipList] = useState(
     [] as ScholarshipList[]
   );
 
@@ -82,7 +88,7 @@ export default function Signup() {
   const [uniScholarshipDetails, setUniScholarshipDetails] = useState("");
 
   // Campus Info
-  const [uniCampusType, setUniCampusType] = useState("Urban");
+  const [uniCampusType, setUniCampusType] = useState("");
   const [uniCampusPermanent, setUniCampusPermanent] = useState(false);
   const [uniCampusHousing, setUniCampusHousing] = useState(false);
 
@@ -105,7 +111,7 @@ export default function Signup() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    console.log(formData);
+    formData.append("_id", uni._id);
     formData.append("name", name);
     formData.append("identifier", identifier);
     formData.append("location", location);
@@ -121,16 +127,28 @@ export default function Signup() {
     formData.append("rankings[the][position]", uniTHEPos);
     formData.append("rankings[the][ranking]", uniTHERank);
 
-    formData.append("admission_details[acceptancerate]", uniAdmissionAcceptance.toString());
+    formData.append(
+      "admission_details[acceptancerate]",
+      uniAdmissionAcceptance.toString()
+    );
     formData.append("admission_details[examsystem]", uniAdmissionExamSystem);
-    formData.append("admission_details[selectionprocedure]", uniAdmissionSelectionPro);
+    formData.append(
+      "admission_details[selectionprocedure]",
+      uniAdmissionSelectionPro
+    );
     formData.append("admission_details[quota]", uniAdmissionQuota.toString());
-    formData.append("admission_details[scholarship]", uniAdmissionScholarship.toString());
+    formData.append(
+      "admission_details[scholarship]",
+      uniAdmissionScholarship.toString()
+    );
 
     formData.append("application_details[website]", uniApplicationWebsite);
     formData.append("application_details[deadline]", uniApplicationDeadline);
     formData.append("application_details[fee]", uniApplicationFees);
-    formData.append("application_details[requirements]", uniApplicationRequirements);
+    formData.append(
+      "application_details[requirements]",
+      uniApplicationRequirements
+    );
 
     // Subject And Majors
     // Quota List
@@ -140,27 +158,37 @@ export default function Signup() {
     formData.append("campus_info[permanent]", uniCampusPermanent.toString());
     formData.append("campus_info[housing]", uniCampusHousing.toString());
 
-    formData.append("life_after_graduation[gradtime]", uniLifeAfterGradTime.toString());
-    formData.append("life_after_graduation[salary]", uniLifeAfterGradSalary.toString());
-    formData.append("life_after_graduation[employment]", uniLifeAfterGradEmployment);
-  
+    formData.append(
+      "life_after_graduation[gradtime]",
+      uniLifeAfterGradTime.toString()
+    );
+    formData.append(
+      "life_after_graduation[salary]",
+      uniLifeAfterGradSalary.toString()
+    );
+    formData.append(
+      "life_after_graduation[employment]",
+      uniLifeAfterGradEmployment
+    );
+
     formData.append("eca_opportunity[total_clubs]", uniECATotal.toString());
     formData.append("eca_opportunity[gradtime]", uniECAClubs.toString());
 
     if (image) formData.append("image", image);
-    console.log("No Problem")
-    console.log(formData);
+    console.log("Kemon aso tomra?")
+    // console.log(...formData);
 
-    const url = "http://localhost:5050/api/unis/add";
+    const url = "http://localhost:5050/api/unis/" + uni.identifier;
+
     const response = await fetch(url, {
-      method: "POST",
+      method: "PUT",
       headers: {
         Accept: "application/json",
       },
       body: formData,
     });
     if (response.status === 201) {
-      router.push(`/university/${identifier}`);
+    //   router.push(`/university/${uni.identifier}`);
       console.log(response);
     }
   };
@@ -171,7 +199,7 @@ export default function Signup() {
         <h1 className="block text-2xl mb-8 font-bold">Edit University</h1>
         <form className="" onSubmit={handleSubmit}>
           <InputField id="add_uni_name" value={name} setValue={setName}>
-            Name
+            {uni.name}
           </InputField>
           <InputField
             id="add_uni_identifier"
@@ -192,7 +220,8 @@ export default function Signup() {
               {image ? (
                 <img src={URL.createObjectURL(image)} alt="" />
               ) : (
-                <p>No image selected</p>
+                <img src={uni.img} alt="" />
+                // <p>No image selected</p>
               )}
             </div>
             <label
@@ -311,11 +340,11 @@ export default function Signup() {
             isChecked={uniAdmissionQuota}
             setIsChecked={setUniAdmissionQuota}
           />
-          <CheckBoxField
+          {/* <CheckBoxField
             field="Scholarship"
             isChecked={uniAdmissionScholarship}
             setIsChecked={setUniAdmissionScholarship}
-          />
+          /> */}
 
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
             Application
@@ -460,7 +489,7 @@ export default function Signup() {
           >
             Years
           </NumberField>
-          
+
           <InputField
             id="add_uni_uniScholarshipRequirements"
             value={uniScholarshipRequirements}
@@ -555,38 +584,38 @@ export default function Signup() {
           </InputField>
 
           {/*           
-          <div className="flex flex-col gap-2 pb-4">
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio h-5 w-5"
-                value="Student"
-                checked={selectedLoginType === "Student"}
-                onChange={handleRadioChange}
-              />
-              <span className="ml-2">Student</span>
-            </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio h-5 w-5"
-                value="University"
-                checked={selectedLoginType === "University"}
-                onChange={handleRadioChange}
-              />
-              <span className="ml-2">University</span>
-            </label>
-            <label className="inline-flex items-center">
-              <input
-                type="radio"
-                className="form-radio text-indigo-600 h-5 w-5"
-                value="Admin"
-                checked={selectedLoginType === "Admin"}
-                onChange={handleRadioChange}
-              />
-              <span className="ml-2">Admin</span>
-            </label>
-          </div> */}
+        <div className="flex flex-col gap-2 pb-4">
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              className="form-radio h-5 w-5"
+              value="Student"
+              checked={selectedLoginType === "Student"}
+              onChange={handleRadioChange}
+            />
+            <span className="ml-2">Student</span>
+          </label>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              className="form-radio h-5 w-5"
+              value="University"
+              checked={selectedLoginType === "University"}
+              onChange={handleRadioChange}
+            />
+            <span className="ml-2">University</span>
+          </label>
+          <label className="inline-flex items-center">
+            <input
+              type="radio"
+              className="form-radio text-indigo-600 h-5 w-5"
+              value="Admin"
+              checked={selectedLoginType === "Admin"}
+              onChange={handleRadioChange}
+            />
+            <span className="ml-2">Admin</span>
+          </label>
+        </div> */}
           <button
             type="submit"
             className="text-ed-text bg-white hover:bg-ed-sec hover:text-white border-solid border-2 border-ed-sec font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center "

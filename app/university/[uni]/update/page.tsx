@@ -1,5 +1,6 @@
 "use client";
 
+import UpdateUni from "@/components/Organizer/UpdateUni";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AlumniCards from "@/components/Universities/AlumniCards";
 import UniCatCards from "@/components/Universities/Categories/UniCatCards";
@@ -75,11 +76,7 @@ export default function Page({ params }: { params: { uni: string } }) {
       <div className="">
         {data[0]?.name ? (
           <div>
-            <UniHero uni={data[0]} />
-            {/* <UniNav /> */}
-            <UniCatCards uni={data[0]} />
-            <UniReviews reviews={reviews} />
-            <AlumniCards />
+            <UpdateUni uni={data[0]} />
           </div>
         ) : (
           <p>Loading...</p>

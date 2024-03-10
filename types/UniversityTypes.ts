@@ -51,6 +51,11 @@ export interface Ranking {
   ranking: string;
 }
 
+export interface Rankings {
+  qs: Ranking[];
+  the: Ranking[];
+}
+
 export interface About {
   website: string;
   location: string;
@@ -93,6 +98,7 @@ export interface EcaOpportunity {
 }
 
 export interface University {
+  _id: string;
   name: string;
   identifier: string;
   img: string;
@@ -100,8 +106,8 @@ export interface University {
   desc: string;
   about: About;
   rankings: {
-      qs: Ranking[];
-      the: Ranking[];
+    qs: Ranking[];
+    the: Ranking[];
   };
   admission_details: AdmissionDetails;
   application_details: ApplicationDetails;

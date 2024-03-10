@@ -1,14 +1,19 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Link from "next/link";
-import { useAppSelector } from "@/store/store";
+import { AppDispatch, useAppSelector } from "@/store/store";
 import { RxCross1 } from "react-icons/rx";
 import Logout from "@/components/Organizer/Logout";
+import { useDispatch } from "react-redux";
+import { login } from "@/store/userSlice";
 
 export default function Navbar() {
   const user = useAppSelector((state) => state.user);
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const dispatch = useDispatch<AppDispatch>()
+
 
   const links = [
     {
@@ -33,10 +38,39 @@ export default function Navbar() {
     },
   ];
 
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const url = "http://localhost:5050/currUser"; 
+        const response = await fetch(url, {
+          method: 'GET',
+          credentials: 'include',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          }
+        })
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+        console.log("Phaqqq")
+        console.log(jsonData)
+        dispatch(login(jsonData));
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    if(!user.name) fetchData();
+  }, []);
+
   return (
     <div className="h-20 lg:max-w-[80%] m-auto flex items-center justify-between p-4">
       <div>
-        <img className="h-8" src="./edmission.svg" alt="" />
+        <Link href={"/"}>
+          <img className="h-8" src="./edmission.svg" alt="" />
+        </Link>
       </div>
       <div>
         <button
@@ -67,11 +101,12 @@ export default function Navbar() {
             <div>
               <div className="flex gap-4 text-xl items-center">
                 <h3>{user.name}</h3>
-                <img
+                {/* <img
                   className=" h-12 w-12 object-cover rounded-full"
                   src={user.image}
                   alt=""
-                />
+                /> */}
+                {user.accType}
               </div>
             </div>
           )}
@@ -131,11 +166,12 @@ export default function Navbar() {
                 <div className="flex items-center justify-end">
                   <div className="flex gap-4 text-xl items-center">
                     <h3>{user.name}</h3>
-                    <img
+                    {/* <img
                       className=" h-12 w-12 object-cover rounded-full"
                       src={user.image}
                       alt=""
-                    />
+                    /> */}
+                {user.accType}
                   </div>
                 </div>
               )}
