@@ -54,8 +54,6 @@ export default function Navbar() {
           throw new Error('Network response was not ok');
         }
         const jsonData = await response.json();
-        console.log("Phaqqq")
-        console.log(jsonData)
         dispatch(login(jsonData));
       } catch (error) {
         console.error('Error fetching data:', error);

@@ -12,7 +12,7 @@ export type AdmissionUni = {
     examsys: string;
     selection: string;
     quota: string;
-    scholarship: string;
+    scholarship: boolean;
 }
 
 export type DetailsUni = {
@@ -60,5 +60,5 @@ export type Reviews = {
     stars: number;
     from: string;
     date: string;
-    review: string;
+    view: string;
 }

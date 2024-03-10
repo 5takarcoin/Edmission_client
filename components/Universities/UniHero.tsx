@@ -4,8 +4,6 @@ import { GoLocation } from "react-icons/go";
 
 export default function UniHero({ uni }: { uni: University }) {
 
-  console.log("Ekhan theke")
-  console.log(uni)
   return (
     <div className="flex flex-col lg:flex-row gap-4 px-2 md:px-12">
       <div className="flex-col space-y-8 flex-[2]">

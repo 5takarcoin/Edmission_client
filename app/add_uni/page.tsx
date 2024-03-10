@@ -8,11 +8,6 @@ import { QuotaList, ScholarshipList } from "@/types/UniversityTypes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
-type UserType = {
-  name: string;
-};
-
-type LoginType = "Student" | "University" | "Admin";
 
 export default function Signup() {
   const router = useRouter();
@@ -21,6 +16,7 @@ export default function Signup() {
   const [identifier, setIdentifier] = useState("");
   const [location, setLocation] = useState("");
   const [image, setImage] = useState<null | File>(null);
+  const [logo, setLogo] = useState<null | File>(null);
 
   const [description, setDescription] = useState("");
 
@@ -38,7 +34,8 @@ export default function Signup() {
 
   // Admision Details
   const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(0);
-  const [uniAdmissionExamSystem, setUniAdmissionExamSystem] = useState("No exams");
+  const [uniAdmissionExamSystem, setUniAdmissionExamSystem] =
+    useState("No exams");
   const [uniAdmissionSelectionPro, setUniAdmissionSelectionPro] = useState("");
   const [uniAdmissionQuota, setUniAdmissionQuota] = useState(false);
   const [uniAdmissionScholarship, setUniAdmissionScholarship] = useState(false);
@@ -53,14 +50,16 @@ export default function Signup() {
   // Subject and Majors
   const [uniSubAndMajors, setUniSubAndMajors] = useState([] as SubMajor[]);
 
-  const [uniSabAndMajSubMaj, setUniSubAndMajSubMaj] = useState("");
-  const [uniSabAndMajSeats, setUniSubAndMajSeats] = useState(0);
-  const [uniSabAndMajProfs, setUniSubAndMajProfs] = useState(0);
-  const [uniSabAndMajLects, setUniSubAndMajLects] = useState(0);
-  const [uniSabAndMajCreds, setUniSubAndMajCreds] = useState(0);
-  const [uniSabAndMajEstLow, setUniSubAndMajEstLow] = useState(0);
-  const [uniSabAndMajEstHigh, setUniSubAndMajEstHigh] = useState(0);
-  const [uniSabAndMajSyllabus, setUniSubAndMajSyllabus] = useState("");
+  const [showOneSubMaj, setShowOneSubMaj] = useState(false);
+
+  const [uniSubAndMajSubMaj, setUniSubAndMajSubMaj] = useState("");
+  const [uniSubAndMajSeats, setUniSubAndMajSeats] = useState(0);
+  const [uniSubAndMajProfs, setUniSubAndMajProfs] = useState(0);
+  const [uniSubAndMajLects, setUniSubAndMajLects] = useState(0);
+  const [uniSubAndMajCreds, setUniSubAndMajCreds] = useState(0);
+  const [uniSubAndMajEstLow, setUniSubAndMajEstLow] = useState(0);
+  const [uniSubAndMajEstHigh, setUniSubAndMajEstHigh] = useState(0);
+  const [uniSubAndMajSyllabus, setUniSubAndMajSyllabus] = useState("");
 
   // Quota List
   const [uniQuotaList, seUniQuotaList] = useState([] as QuotaList[]);
@@ -121,18 +120,31 @@ export default function Signup() {
     formData.append("rankings[the][position]", uniTHEPos);
     formData.append("rankings[the][ranking]", uniTHERank);
 
-    formData.append("admission_details[acceptancerate]", uniAdmissionAcceptance.toString());
+    formData.append(
+      "admission_details[acceptancerate]",
+      uniAdmissionAcceptance.toString()
+    );
     formData.append("admission_details[examsystem]", uniAdmissionExamSystem);
-    formData.append("admission_details[selectionprocedure]", uniAdmissionSelectionPro);
+    formData.append(
+      "admission_details[selectionprocedure]",
+      uniAdmissionSelectionPro
+    );
     formData.append("admission_details[quota]", uniAdmissionQuota.toString());
-    formData.append("admission_details[scholarship]", uniAdmissionScholarship.toString());
+    formData.append(
+      "admission_details[scholarship]",
+      uniAdmissionScholarship.toString()
+    );
 
     formData.append("application_details[website]", uniApplicationWebsite);
     formData.append("application_details[deadline]", uniApplicationDeadline);
     formData.append("application_details[fee]", uniApplicationFees);
-    formData.append("application_details[requirements]", uniApplicationRequirements);
+    formData.append(
+      "application_details[requirements]",
+      uniApplicationRequirements
+    );
 
     // Subject And Majors
+    formData.append("subject_majors", JSON.stringify(uniSubAndMajors))
     // Quota List
     // Scholarship List
 
@@ -140,15 +152,27 @@ export default function Signup() {
     formData.append("campus_info[permanent]", uniCampusPermanent.toString());
     formData.append("campus_info[housing]", uniCampusHousing.toString());
 
-    formData.append("life_after_graduation[gradtime]", uniLifeAfterGradTime.toString());
-    formData.append("life_after_graduation[salary]", uniLifeAfterGradSalary.toString());
-    formData.append("life_after_graduation[employment]", uniLifeAfterGradEmployment);
-  
+    formData.append(
+      "life_after_graduation[gradtime]",
+      uniLifeAfterGradTime.toString()
+    );
+    formData.append(
+      "life_after_graduation[salary]",
+      uniLifeAfterGradSalary.toString()
+    );
+    formData.append(
+      "life_after_graduation[employment]",
+      uniLifeAfterGradEmployment
+    );
+
     formData.append("eca_opportunity[total_clubs]", uniECATotal.toString());
     formData.append("eca_opportunity[gradtime]", uniECAClubs.toString());
 
+    formData.append("reviews", JSON.stringify([]))
+
     if (image) formData.append("image", image);
-    console.log("No Problem")
+    if (logo) formData.append("logo", logo);
+    console.log("No Problem");
     console.log(formData);
 
     const url = "http://localhost:5050/api/unis/add";
@@ -166,8 +190,10 @@ export default function Signup() {
   };
 
   return (
-    <div className="flex text-ed-text items-center justify-center min-h-[600px]">
-      <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl">
+    // <div className="flex text-ed-text items-center justify-center min-h-[600px]">
+    <div className="flex text-ed-text">
+      {/* <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl"> */}
+      <div className="w-full">
         <h1 className="block text-2xl mb-8 font-bold">Edit University</h1>
         <form className="" onSubmit={handleSubmit}>
           <InputField id="add_uni_name" value={name} setValue={setName}>
@@ -210,6 +236,29 @@ export default function Signup() {
               className="hidden"
             />
           </div>
+          <div className="mb-5">
+            <div className="my-4">
+              {logo ? (
+                <img src={URL.createObjectURL(logo)} alt="" />
+              ) : (
+                <p>No logo selected</p>
+              )}
+            </div>
+            <label
+              htmlFor="logo"
+              className="mb-2 text-ed-text text-sm bg-white rounded-md border border-ed-sec font-medium h-10 w-full flex justify-center  items-center text-center"
+            >
+              <span>{logo ? "Change Logo" : "Choose your Logo"}</span>
+            </label>
+            <input
+              onChange={(e) =>
+                setLogo(e.target.files ? e.target.files[0] : null)
+              }
+              type="file"
+              id="logo"
+              className="hidden"
+            />
+          </div>
           <InputField
             id="add_uni_description"
             value={description}
@@ -217,7 +266,7 @@ export default function Signup() {
           >
             Description
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             About
           </h3>
           <InputField
@@ -249,7 +298,7 @@ export default function Signup() {
             Tuition Fees
           </NumberField>
 
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Ranking
           </h3>
 
@@ -281,7 +330,7 @@ export default function Signup() {
           >
             THE Rank
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Admission
           </h3>
 
@@ -317,7 +366,7 @@ export default function Signup() {
             setIsChecked={setUniAdmissionScholarship}
           />
 
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Application
           </h3>
 
@@ -349,133 +398,168 @@ export default function Signup() {
           >
             Application Requirements
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Subject and Majors
           </h3>
+          {uniSubAndMajors.map((sumbaj, i) => {
+            return <div key={"add_uni_"+i}>
+              <p>{sumbaj.submaj}</p>
+            </div>
+          })}
+          {!showOneSubMaj && (
+            <button onClick={() => setShowOneSubMaj(true)}>Add +</button>
+          )}
+          {showOneSubMaj && (
+            <div>
+              <InputField
+                id="add_uni_uniSubAndMajSubMaj"
+                value={uniSubAndMajSubMaj}
+                setValue={setUniSubAndMajSubMaj}
+              >
+                Subject and Major
+              </InputField>
+              <NumberField
+                id="add_uni_uniSubAndMajSeats"
+                value={uniSubAndMajSeats}
+                setValue={setUniSubAndMajSeats}
+              >
+                Seats
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajProfs"
+                value={uniSubAndMajProfs}
+                setValue={setUniSubAndMajProfs}
+              >
+                Professors
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajLects"
+                value={uniSubAndMajLects}
+                setValue={setUniSubAndMajLects}
+              >
+                Lecturers
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajCreds"
+                value={uniSubAndMajCreds}
+                setValue={setUniSubAndMajCreds}
+              >
+                Credits
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajEstLow"
+                value={uniSubAndMajEstLow}
+                setValue={setUniSubAndMajEstLow}
+              >
+                Estimated Low
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajEstHigh"
+                value={uniSubAndMajEstHigh}
+                setValue={setUniSubAndMajEstHigh}
+              >
+                Estimated High
+              </NumberField>
+              <InputField
+                id="add_uni_uniSubAndMajSyllabus"
+                value={uniSubAndMajSyllabus}
+                setValue={setUniSubAndMajSyllabus}
+                >
+                Syllabus
+              </InputField>
+              <button onClick={() => {
+                setShowOneSubMaj(false);
+                const oneSubMaj : SubMajor = {
+                  submaj: uniSubAndMajSubMaj,
+                  seats:  uniSubAndMajSeats,
+                  profs: uniSubAndMajProfs,
+                  lects: uniSubAndMajLects,
+                  creds: uniSubAndMajCreds,
+                  estlow: uniSubAndMajEstLow,
+                  esthigh: uniSubAndMajEstHigh,
+                  syl: uniSubAndMajSyllabus
+                }
+                setUniSubAndMajors([...uniSubAndMajors, oneSubMaj])
 
-          <InputField
-            id="add_uni_uniSabAndMajSubMaj"
-            value={uniSabAndMajSubMaj}
-            setValue={setUniSubAndMajSubMaj}
-          >
-            Subject and Major
-          </InputField>
-          <NumberField
-            id="add_uni_uniSabAndMajSeats"
-            value={uniSabAndMajSeats}
-            setValue={setUniSubAndMajSeats}
-          >
-            Seats
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajProfs"
-            value={uniSabAndMajProfs}
-            setValue={setUniSubAndMajProfs}
-          >
-            Professors
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajLects"
-            value={uniSabAndMajLects}
-            setValue={setUniSubAndMajLects}
-          >
-            Lecturers
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajCreds"
-            value={uniSabAndMajCreds}
-            setValue={setUniSubAndMajCreds}
-          >
-            Credits
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajEstLow"
-            value={uniSabAndMajEstLow}
-            setValue={setUniSubAndMajEstLow}
-          >
-            Estimated Low
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajEstHigh"
-            value={uniSabAndMajEstHigh}
-            setValue={setUniSubAndMajEstHigh}
-          >
-            Estimated High
-          </NumberField>
-          <InputField
-            id="add_uni_uniSabAndMajSyllabus"
-            value={uniSabAndMajSyllabus}
-            setValue={setUniSubAndMajSyllabus}
-          >
-            Syllabus
-          </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
-            Quota
-          </h3>
+                console.log(uniSubAndMajors.toString())
 
-          <InputField
-            id="add_uni_uniQuotaName"
-            value={uniQuotaName}
-            setValue={setUniQuotaName}
-          >
-            Quota Name
-          </InputField>
-          <InputField
-            id="add_uni_uniQuotaRequirements"
-            value={uniQuotaRequirements}
-            setValue={setUniQuotaRequirements}
-          >
-            Quota Requirements
-          </InputField>
-          <InputField
-            id="add_uni_uniQuotaDetails"
-            value={uniQuotaDetails}
-            setValue={setUniQuotaDetails}
-          >
-            Quota Details
-          </InputField>
+                setUniSubAndMajSubMaj("");
+                setUniSubAndMajSeats(0);
+                setUniSubAndMajProfs(0);
+                setUniSubAndMajLects(0);
+                setUniSubAndMajCreds(0);
+                setUniSubAndMajSyllabus("");
 
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
-            Scholarships
-          </h3>
+              }}>Add</button>
+                </div>
+              )}
+              <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
+                Quota
+              </h3>
 
-          <InputField
-            id="add_uni_uniScholarshipName"
-            value={uniScholarshipName}
-            setValue={setUniScholarshipName}
-          >
-            Name
-          </InputField>
-          <NumberField
-            id="add_uni_uniScholarshipAmount"
-            value={uniScholarshipAmount}
-            setValue={setUniScholarshipAmount}
-          >
-            Amount
-          </NumberField>
-          <NumberField
-            id="add_uni_uniScholarshipYears"
-            value={uniScholarshipYears}
-            setValue={setUniScholarshipYears}
-          >
-            Years
-          </NumberField>
-          
-          <InputField
-            id="add_uni_uniScholarshipRequirements"
-            value={uniScholarshipRequirements}
-            setValue={setUniScholarshipRequirements}
-          >
-            Requirements
-          </InputField>
-          <InputField
-            id="add_uni_uniScholarshipDetails"
-            value={uniScholarshipDetails}
-            setValue={setUniScholarshipDetails}
-          >
-            Details
-          </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+              <InputField
+                id="add_uni_uniQuotaName"
+                value={uniQuotaName}
+                setValue={setUniQuotaName}
+              >
+                Quota Name
+              </InputField>
+              <InputField
+                id="add_uni_uniQuotaRequirements"
+                value={uniQuotaRequirements}
+                setValue={setUniQuotaRequirements}
+              >
+                Quota Requirements
+              </InputField>
+              <InputField
+                id="add_uni_uniQuotaDetails"
+                value={uniQuotaDetails}
+                setValue={setUniQuotaDetails}
+              >
+                Quota Details
+              </InputField>
+
+              <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
+                Scholarships
+              </h3>
+
+              <InputField
+                id="add_uni_uniScholarshipName"
+                value={uniScholarshipName}
+                setValue={setUniScholarshipName}
+              >
+                Name
+              </InputField>
+              <NumberField
+                id="add_uni_uniScholarshipAmount"
+                value={uniScholarshipAmount}
+                setValue={setUniScholarshipAmount}
+              >
+                Amount
+              </NumberField>
+              <NumberField
+                id="add_uni_uniScholarshipYears"
+                value={uniScholarshipYears}
+                setValue={setUniScholarshipYears}
+              >
+                Years
+              </NumberField>
+
+              <InputField
+                id="add_uni_uniScholarshipRequirements"
+                value={uniScholarshipRequirements}
+                setValue={setUniScholarshipRequirements}
+              >
+                Requirements
+              </InputField>
+              <InputField
+                id="add_uni_uniScholarshipDetails"
+                value={uniScholarshipDetails}
+                setValue={setUniScholarshipDetails}
+              >
+                Details
+              </InputField>
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Campus Type
           </h3>
 
@@ -498,7 +582,7 @@ export default function Signup() {
             isChecked={uniCampusHousing}
             setIsChecked={setUniCampusHousing}
           />
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Life After Graduation
           </h3>
 
@@ -524,7 +608,7 @@ export default function Signup() {
           >
             Employment After Graduation
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             ECA Opportunities
           </h3>
 
@@ -542,7 +626,7 @@ export default function Signup() {
           >
             ECA Clubs
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 ed-white-4">
             Notable Alumnis
           </h3>
 

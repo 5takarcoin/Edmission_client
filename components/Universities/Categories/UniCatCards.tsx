@@ -14,10 +14,6 @@ import { Ranking, Rankings, University } from "@/types/UniversityTypes";
 
 function UniCatCards({ uni }: { uni: University }) {
 
-  
-  console.log("Baal theke")
-  console.log(uni)
-
   const aboutUni: AboutUni = {
     link: uni.about.website,
     location: uni.about.location,

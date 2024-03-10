@@ -6,7 +6,6 @@ import { IoMdThumbsDown, IoMdThumbsUp } from "react-icons/io";
 import Testy from "./Testy";
 
 const UniReviews = ({ reviews }: { reviews: Reviews[] }) => {
- 
   return (
     <div>
       <h1 className="font-bold">Reviews</h1>
@@ -54,7 +53,7 @@ const UniReviews = ({ reviews }: { reviews: Reviews[] }) => {
                     <span key={index} ><CiStar /></span>
                     ))}
                     </p>
-                <p>{rev.review}</p>
+                <p>{rev.view}</p>
               </div>
             );
           })}

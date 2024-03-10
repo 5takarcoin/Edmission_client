@@ -13,6 +13,14 @@ const tempBadge = {
   desc: "some description",
 };
 
+function truncateDescription(description: string) {
+  if (description.length > 200) {
+      return description.substring(0, 197) + '...';
+  } else {
+      return description;
+  }
+}
+
 export default function UniSearchCard({
   name,
   location,
@@ -21,6 +29,7 @@ export default function UniSearchCard({
   about,
   reviews,
 }: University) {
+  const editedDesc = truncateDescription(desc);
   return (
     <div className="flex-col bg-ed-card text-ed-text p-4 rounded-lg">
       {/* {sponsored && <SponsoredCard />} */}
@@ -57,9 +66,10 @@ export default function UniSearchCard({
 
             </span>
           </p>
-          <p className="pt-2 text-sm">{desc}</p>
+          <p className="pt-2 text-sm">{editedDesc}</p>
         </div>
       </div>
+      {false &&
       <div className="flex flex-col md:flex-row pt-4 gap-2">
         <UniSearchCardBadge badge={tempBadge}>
           <GoLocation />
@@ -71,7 +81,7 @@ export default function UniSearchCard({
         <UniSearchCardBadge badge={tempBadge}>
           <FaStar />
         </UniSearchCardBadge>
-      </div>
+      </div>}
     </div>
   );
 }

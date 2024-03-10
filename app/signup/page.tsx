@@ -31,15 +31,14 @@ export default function Signup() {
     e.preventDefault();
 
     const formData = new FormData();
-    console.log(formData);
     formData.append("name", name);
     formData.append("username", username);
     formData.append("password", password);
     formData.append("accType", selectedLoginType);
+  
     // if (image) formData.append("image", image);
-    // console.log(formData);
-
-    console.log(username, name, password);
+    
+    console.log(username, name, password, selectedLoginType);
     const url = "http://localhost:5050/signup";
     const response = await fetch(url, {
       method: "POST",

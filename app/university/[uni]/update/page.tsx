@@ -31,24 +31,24 @@ export default function Page({ params }: { params: { uni: string } }) {
   const [data, setData] = useState<University[]>([] as University[]);
   const [uniId, setUniId] = useState<string>("Fafsa")
 
-  const reviews: Reviews[] = [
-    {
-      recommended: true,
-      from: "Alumni (CSE)",
-      date: "July 20, 2024",
-      stars: 4,
-      review:
-        "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately.",
-    },
-    {
-      recommended: false,
-      from: "Senior (EEE)",
-      date: "July 20, 2024",
-      stars: 3,
-      review:
-        "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consunier BUET a top 10 university in Bangladesh.",
-    },
-  ];
+//   const reviews: Reviews[] = [
+//     {
+//       recommended: true,
+//       from: "Alumni (CSE)",
+//       date: "July 20, 2024",
+//       stars: 4,
+//       review:
+//         "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately.",
+//     },
+//     {
+//       recommended: false,
+//       from: "Senior (EEE)",
+//       date: "July 20, 2024",
+//       stars: 3,
+//       review:
+//         "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consunier BUET a top 10 university in Bangladesh.",
+//     },
+//   ];
 
   useEffect(() => {
     async function fetchData() {

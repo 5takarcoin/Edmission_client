@@ -1,5 +1,6 @@
 "use client";
 
+import ReviewField from "@/components/Organizer/ReviewField";
 import Sidebar from "@/components/Sidebar/Sidebar";
 import AlumniCards from "@/components/Universities/AlumniCards";
 import UniCatCards from "@/components/Universities/Categories/UniCatCards";
@@ -7,6 +8,7 @@ import UniReviews from "@/components/Universities/Categories/UniReviews";
 import UniHero from "@/components/Universities/UniHero";
 import UniNav from "@/components/Universities/UniNav";
 import UniSearchCard from "@/components/Universities/UniSearchCard";
+import { useAppSelector } from "@/store/store";
 import { Reviews } from "@/types/CategoryTypes";
 import { University } from "@/types/UniversityTypes";
 import { unique } from "next/dist/build/utils";
@@ -27,27 +29,31 @@ import { useEffect, useState } from "react";
 // }
 
 export default function Page({ params }: { params: { uni: string } }) {
+
+  const user = useAppSelector((state) => state.user);
+
   const [data, setData] = useState<University[]>([] as University[]);
   const [uniId, setUniId] = useState<string>("Fafsa")
+  const [reviews, setReviews] = useState([] as Reviews[])
 
-  const reviews: Reviews[] = [
-    {
-      recommended: true,
-      from: "Alumni (CSE)",
-      date: "July 20, 2024",
-      stars: 4,
-      review:
-        "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately.",
-    },
-    {
-      recommended: false,
-      from: "Senior (EEE)",
-      date: "July 20, 2024",
-      stars: 3,
-      review:
-        "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consunier BUET a top 10 university in Bangladesh.",
-    },
-  ];
+  // const reviews: Reviews[] = [
+  //   {
+  //     recommended: true,
+  //     from: "Alumni (CSE)",
+  //     date: "July 20, 2024",
+  //     stars: 4,
+  //     review:
+  //       "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately.",
+  //   },
+  //   {
+  //     recommended: false,
+  //     from: "Senior (EEE)",
+  //     date: "July 20, 2024",
+  //     stars: 3,
+  //     review:
+  //       "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consunier BUET a top 10 university in Bangladesh.",
+  //   },
+  // ];
 
   useEffect(() => {
     async function fetchData() {
@@ -62,6 +68,9 @@ export default function Page({ params }: { params: { uni: string } }) {
         const jsonData = await response.json();
         setData(jsonData);
         setUniId(jsonData._id);
+        setReviews(jsonData[0].reviews)
+        console.log("Ora bole")
+        console.log(reviews)
       } catch (error) {
         console.error("Error fetching data:", error);
       }
@@ -78,7 +87,14 @@ export default function Page({ params }: { params: { uni: string } }) {
             <UniHero uni={data[0]} />
             {/* <UniNav /> */}
             <UniCatCards uni={data[0]} />
+            <p>Curr User: {user.name} | {user.accType}</p>
+            {user.accType == "Student" &&
+            <div>
+              <ReviewField uniId={data[0].identifier} userId={user._id} setReviews={setReviews}/>
+            </div> 
+          }
             <UniReviews reviews={reviews} />
+            <p>{reviews.length}</p>
             <AlumniCards />
           </div>
         ) : (

@@ -11,6 +11,8 @@
 //   identifier: string;
 // };
 
+import { Reviews } from "./CategoryTypes";
+
 export interface Review {
   // Define properties of the review
   // For example:
@@ -70,7 +72,7 @@ export interface AdmissionDetails {
   examsystem: "Autonomus" | "No exams";
   selectionprocedure: string;
   quota: boolean;
-  scholarship: string;
+  scholarship: boolean;
 }
 
 export interface ApplicationDetails {
@@ -102,6 +104,7 @@ export interface University {
   name: string;
   identifier: string;
   img: string;
+  logo: string;
   location: string;
   desc: string;
   about: About;
@@ -117,6 +120,6 @@ export interface University {
   campus_info: CampusInfo;
   life_after_graduation: LifeAfterGraduation;
   eca_opportunity: EcaOpportunity;
-  reviews: Review[]; // Assuming it's an array of review IDs
+  reviews: Reviews[]; // Assuming it's an array of review IDs
   notable_alumni: string[]; // Assuming it's an array of alumni IDs
 }

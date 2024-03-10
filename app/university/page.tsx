@@ -53,24 +53,20 @@ export default function page({ params }: { params: any }) {
     fetchData();
   }, []);
 
-  const reviews: Reviews[] = [
-    {
-      recommended: true,
-      from: "Alumni (CSE)",
-      date: "July 20, 2024",
-      stars: 4,
-      review:
-        "If you do have to complete your undergrad from Bangladesh, this is the best option you have. It's the country's best engineering school. But the standards are still not up to the mark unfortunately.",
-    },
-    {
-      recommended: false,
-      from: "Senior (EEE)",
-      date: "July 20, 2024",
-      stars: 3,
-      review:
-        "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consider BUET a top 10 university in Bangladesh.",
-    },
-  ];
+  // const reviews: Reviews[] = [
+  //   {
+  //     recommended: true,
+  //     from: "Alumni (CSE)",
+  //     date: "July 20, 2024",
+  //     stars: 4,
+  //     review:
+  //       "If you do have to com
+  //     date: "July 20, 2024",
+  //     stars: 3,
+  //     review:
+  //       "BUET is still the top university of Bangladesh only because of the admission exam. If there were no exams, I wouldn’t even consider BUET a top 10 university in Bangladesh.",
+  //   },
+  // ];
 
   return (
     <div className="space-y-8">
@@ -81,7 +77,7 @@ export default function page({ params }: { params: any }) {
             <UniHero uni={data[0]} />
             {/* <UniNav /> */}
             <UniCatCards uni={data[0]}/>
-            <UniReviews reviews={reviews} />
+            {/* <UniReviews reviews={reviews} /> */}
             <AlumniCards />
           </div>
         ) : (

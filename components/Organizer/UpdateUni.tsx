@@ -14,14 +14,13 @@ import { useEffect, useState } from "react";
 
 export default function UpdateUni({ uni }: { uni: University }) {
 
-console.log("ayhayayya")
-console.log(uni)
   const router = useRouter();
 
   const [name, setName] = useState(uni.name);
   const [identifier, setIdentifier] = useState(uni.identifier);
   const [location, setLocation] = useState(uni.location);
   const [image, setImage] = useState<null | File>(null);
+  const [logo, setLogo] = useState<null | File>(null);
 
   const [description, setDescription] = useState(uni.desc);
 
@@ -54,17 +53,17 @@ console.log(uni)
 
   // Subject and Majors
   const [uniSubAndMajors, setUniSubAndMajors] = useState(uni.subject_majors);
-  const oneSubMaj = {} as Subnmajor;
-  if (uniSubAndMajors.length > 0) uniSubAndMajors[0];
+ 
+  const [showOneSubMaj, setShowOneSubMaj] = useState(false)
 
-  const [uniSabAndMajSubMaj, setUniSubAndMajSubMaj] = useState(oneSubMaj.submaj);
-  const [uniSabAndMajSeats, setUniSubAndMajSeats] = useState(oneSubMaj.seats);
-  const [uniSabAndMajProfs, setUniSubAndMajProfs] = useState(oneSubMaj.profs);
-  const [uniSabAndMajLects, setUniSubAndMajLects] = useState(oneSubMaj.lects);
-  const [uniSabAndMajCreds, setUniSubAndMajCreds] = useState(oneSubMaj.creds);
-  const [uniSabAndMajEstLow, setUniSubAndMajEstLow] = useState(oneSubMaj.estlow);
-  const [uniSabAndMajEstHigh, setUniSubAndMajEstHigh] = useState(oneSubMaj.esthigh);
-  const [uniSabAndMajSyllabus, setUniSubAndMajSyllabus] = useState(oneSubMaj.syl);
+  const [uniSubAndMajSubMaj, setUniSubAndMajSubMaj] = useState("");
+  const [uniSubAndMajSeats, setUniSubAndMajSeats] = useState(0);
+  const [uniSubAndMajProfs, setUniSubAndMajProfs] = useState(0);
+  const [uniSubAndMajLects, setUniSubAndMajLects] = useState(0);
+  const [uniSubAndMajCreds, setUniSubAndMajCreds] = useState(0);
+  const [uniSubAndMajEstLow, setUniSubAndMajEstLow] = useState(0);
+  const [uniSubAndMajEstHigh, setUniSubAndMajEstHigh] = useState(0);
+  const [uniSubAndMajSyllabus, setUniSubAndMajSyllabus] = useState("");
 
   // Quota List
   const [uniQuotaList, setUniQuotaList] = useState(uni.quota_list);
@@ -151,6 +150,7 @@ console.log(uni)
     );
 
     // Subject And Majors
+    formData.append("subject_majors", JSON.stringify(uniSubAndMajors))
     // Quota List
     // Scholarship List
 
@@ -175,6 +175,7 @@ console.log(uni)
     formData.append("eca_opportunity[gradtime]", uniECAClubs.toString());
 
     if (image) formData.append("image", image);
+    if (logo) formData.append("logo", logo);
     console.log("Kemon aso tomra?")
     // console.log(...formData);
 
@@ -188,18 +189,22 @@ console.log(uni)
       body: formData,
     });
     if (response.status === 201) {
-    //   router.push(`/university/${uni.identifier}`);
+      router.push(`/university/${uni.identifier}`);
       console.log(response);
     }
   };
 
   return (
-    <div className="flex text-ed-text items-center justify-center min-h-[600px]">
-      <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl">
+    // <div className="flex text-ed-text items-center justify-center min-h-[600px]">
+    //   <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl">
+      // <div className="flex text-ed-text items-center justify-center min-h-[600px]">
+    <div className="flex text-ed-text">
+      {/* <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl"> */}
+      <div className="w-full">
         <h1 className="block text-2xl mb-8 font-bold">Edit University</h1>
         <form className="" onSubmit={handleSubmit}>
           <InputField id="add_uni_name" value={name} setValue={setName}>
-            {uni.name}
+            Name
           </InputField>
           <InputField
             id="add_uni_identifier"
@@ -221,7 +226,6 @@ console.log(uni)
                 <img src={URL.createObjectURL(image)} alt="" />
               ) : (
                 <img src={uni.img} alt="" />
-                // <p>No image selected</p>
               )}
             </div>
             <label
@@ -239,6 +243,29 @@ console.log(uni)
               className="hidden"
             />
           </div>
+          <div className="mb-5">
+            <div className="my-4">
+              {logo ? (
+                <img src={URL.createObjectURL(logo)} alt="" />
+              ) : (
+                <img src={uni.logo} alt="" />
+              )}
+            </div>
+            <label
+              htmlFor="logo"
+              className="mb-2 text-ed-text text-sm bg-white rounded-md border border-ed-sec font-medium h-10 w-full flex justify-center  items-center text-center"
+            >
+              <span>{logo ? "Change Logo" : "Choose your Logo"}</span>
+            </label>
+            <input
+              onChange={(e) =>
+                setLogo(e.target.files ? e.target.files[0] : null)
+              }
+              type="file"
+              id="logo"
+              className="hidden"
+            />
+          </div>
           <InputField
             id="add_uni_description"
             value={description}
@@ -246,7 +273,7 @@ console.log(uni)
           >
             Description
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             About
           </h3>
           <InputField
@@ -278,7 +305,7 @@ console.log(uni)
             Tuition Fees
           </NumberField>
 
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Ranking
           </h3>
 
@@ -310,7 +337,7 @@ console.log(uni)
           >
             THE Rank
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Admission
           </h3>
 
@@ -340,13 +367,13 @@ console.log(uni)
             isChecked={uniAdmissionQuota}
             setIsChecked={setUniAdmissionQuota}
           />
-          {/* <CheckBoxField
+          <CheckBoxField
             field="Scholarship"
             isChecked={uniAdmissionScholarship}
             setIsChecked={setUniAdmissionScholarship}
-          /> */}
+          />
 
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Application
           </h3>
 
@@ -378,133 +405,170 @@ console.log(uni)
           >
             Application Requirements
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Subject and Majors
           </h3>
+          {uniSubAndMajors.map((sumbaj, i) => {
+            return <div key={"update_uni_"+i}>
+              <p>{sumbaj.submaj}</p>
+            </div>
+          })}
+          {!showOneSubMaj && (
+            <button onClick={() => setShowOneSubMaj(true)}>Add +</button>
+          )}
+          {showOneSubMaj && (
+            <div>
+              <InputField
+                id="add_uni_uniSubAndMajSubMaj"
+                value={uniSubAndMajSubMaj}
+                setValue={setUniSubAndMajSubMaj}
+              >
+                Subject and Major
+              </InputField>
+              <NumberField
+                id="add_uni_uniSubAndMajSeats"
+                value={uniSubAndMajSeats}
+                setValue={setUniSubAndMajSeats}
+              >
+                Seats
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajProfs"
+                value={uniSubAndMajProfs}
+                setValue={setUniSubAndMajProfs}
+              >
+                Professors
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajLects"
+                value={uniSubAndMajLects}
+                setValue={setUniSubAndMajLects}
+              >
+                Lecturers
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajCreds"
+                value={uniSubAndMajCreds}
+                setValue={setUniSubAndMajCreds}
+              >
+                Credits
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajEstLow"
+                value={uniSubAndMajEstLow}
+                setValue={setUniSubAndMajEstLow}
+              >
+                Estimated Low
+              </NumberField>
+              <NumberField
+                id="add_uni_uniSubAndMajEstHigh"
+                value={uniSubAndMajEstHigh}
+                setValue={setUniSubAndMajEstHigh}
+              >
+                Estimated High
+              </NumberField>
+              <InputField
+                id="add_uni_uniSubAndMajSyllabus"
+                value={uniSubAndMajSyllabus}
+                setValue={setUniSubAndMajSyllabus}
+                >
+                Syllabus
+              </InputField>
+              <button onClick={() => {
+                setShowOneSubMaj(false);
+                const oneSubMaj : SubMajor = {
+                  submaj: uniSubAndMajSubMaj,
+                  seats:  uniSubAndMajSeats,
+                  profs: uniSubAndMajProfs,
+                  lects: uniSubAndMajLects,
+                  creds: uniSubAndMajCreds,
+                  estlow: uniSubAndMajEstLow,
+                  esthigh: uniSubAndMajEstHigh,
+                  syl: uniSubAndMajSyllabus
+                }
+                setUniSubAndMajors([...uniSubAndMajors, oneSubMaj])
+                console.log("Sub sub subusbu bsubsu")
+                console.log(JSON.stringify(uniSubAndMajors))
 
-          <InputField
-            id="add_uni_uniSabAndMajSubMaj"
-            value={uniSabAndMajSubMaj}
-            setValue={setUniSubAndMajSubMaj}
-          >
-            Subject and Major
-          </InputField>
-          <NumberField
-            id="add_uni_uniSabAndMajSeats"
-            value={uniSabAndMajSeats}
-            setValue={setUniSubAndMajSeats}
-          >
-            Seats
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajProfs"
-            value={uniSabAndMajProfs}
-            setValue={setUniSubAndMajProfs}
-          >
-            Professors
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajLects"
-            value={uniSabAndMajLects}
-            setValue={setUniSubAndMajLects}
-          >
-            Lecturers
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajCreds"
-            value={uniSabAndMajCreds}
-            setValue={setUniSubAndMajCreds}
-          >
-            Credits
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajEstLow"
-            value={uniSabAndMajEstLow}
-            setValue={setUniSubAndMajEstLow}
-          >
-            Estimated Low
-          </NumberField>
-          <NumberField
-            id="add_uni_uniSabAndMajEstHigh"
-            value={uniSabAndMajEstHigh}
-            setValue={setUniSubAndMajEstHigh}
-          >
-            Estimated High
-          </NumberField>
-          <InputField
-            id="add_uni_uniSabAndMajSyllabus"
-            value={uniSabAndMajSyllabus}
-            setValue={setUniSubAndMajSyllabus}
-          >
-            Syllabus
-          </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
-            Quota
-          </h3>
+                setUniSubAndMajSubMaj("");
+                setUniSubAndMajSeats(0);
+                setUniSubAndMajProfs(0);
+                setUniSubAndMajLects(0);
+                setUniSubAndMajCreds(0);
+                setUniSubAndMajEstLow(0);
+                setUniSubAndMajEstHigh(0);
+                setUniSubAndMajSyllabus("");
 
-          <InputField
-            id="add_uni_uniQuotaName"
-            value={uniQuotaName}
-            setValue={setUniQuotaName}
-          >
-            Quota Name
-          </InputField>
-          <InputField
-            id="add_uni_uniQuotaRequirements"
-            value={uniQuotaRequirements}
-            setValue={setUniQuotaRequirements}
-          >
-            Quota Requirements
-          </InputField>
-          <InputField
-            id="add_uni_uniQuotaDetails"
-            value={uniQuotaDetails}
-            setValue={setUniQuotaDetails}
-          >
-            Quota Details
-          </InputField>
+              }}>Add</button>
+                </div>
+              )}
+              <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
+                Quota
+              </h3>
 
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
-            Scholarships
-          </h3>
+              <InputField
+                id="add_uni_uniQuotaName"
+                value={uniQuotaName}
+                setValue={setUniQuotaName}
+              >
+                Quota Name
+              </InputField>
+              <InputField
+                id="add_uni_uniQuotaRequirements"
+                value={uniQuotaRequirements}
+                setValue={setUniQuotaRequirements}
+              >
+                Quota Requirements
+              </InputField>
+              <InputField
+                id="add_uni_uniQuotaDetails"
+                value={uniQuotaDetails}
+                setValue={setUniQuotaDetails}
+              >
+                Quota Details
+              </InputField>
 
-          <InputField
-            id="add_uni_uniScholarshipName"
-            value={uniScholarshipName}
-            setValue={setUniScholarshipName}
-          >
-            Name
-          </InputField>
-          <NumberField
-            id="add_uni_uniScholarshipAmount"
-            value={uniScholarshipAmount}
-            setValue={setUniScholarshipAmount}
-          >
-            Amount
-          </NumberField>
-          <NumberField
-            id="add_uni_uniScholarshipYears"
-            value={uniScholarshipYears}
-            setValue={setUniScholarshipYears}
-          >
-            Years
-          </NumberField>
+              <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
+                Scholarships
+              </h3>
 
-          <InputField
-            id="add_uni_uniScholarshipRequirements"
-            value={uniScholarshipRequirements}
-            setValue={setUniScholarshipRequirements}
-          >
-            Requirements
-          </InputField>
-          <InputField
-            id="add_uni_uniScholarshipDetails"
-            value={uniScholarshipDetails}
-            setValue={setUniScholarshipDetails}
-          >
-            Details
-          </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+              <InputField
+                id="add_uni_uniScholarshipName"
+                value={uniScholarshipName}
+                setValue={setUniScholarshipName}
+              >
+                Name
+              </InputField>
+              <NumberField
+                id="add_uni_uniScholarshipAmount"
+                value={uniScholarshipAmount}
+                setValue={setUniScholarshipAmount}
+              >
+                Amount
+              </NumberField>
+              <NumberField
+                id="add_uni_uniScholarshipYears"
+                value={uniScholarshipYears}
+                setValue={setUniScholarshipYears}
+              >
+                Years
+              </NumberField>
+
+              <InputField
+                id="add_uni_uniScholarshipRequirements"
+                value={uniScholarshipRequirements}
+                setValue={setUniScholarshipRequirements}
+              >
+                Requirements
+              </InputField>
+              <InputField
+                id="add_uni_uniScholarshipDetails"
+                value={uniScholarshipDetails}
+                setValue={setUniScholarshipDetails}
+              >
+                Details
+              </InputField>
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Campus Type
           </h3>
 
@@ -527,7 +591,7 @@ console.log(uni)
             isChecked={uniCampusHousing}
             setIsChecked={setUniCampusHousing}
           />
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Life After Graduation
           </h3>
 
@@ -553,7 +617,7 @@ console.log(uni)
           >
             Employment After Graduation
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             ECA Opportunities
           </h3>
 
@@ -571,7 +635,7 @@ console.log(uni)
           >
             ECA Clubs
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-sec my-4">
+          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Notable Alumnis
           </h3>
 
@@ -584,38 +648,38 @@ console.log(uni)
           </InputField>
 
           {/*           
-        <div className="flex flex-col gap-2 pb-4">
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              className="form-radio h-5 w-5"
-              value="Student"
-              checked={selectedLoginType === "Student"}
-              onChange={handleRadioChange}
-            />
-            <span className="ml-2">Student</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              className="form-radio h-5 w-5"
-              value="University"
-              checked={selectedLoginType === "University"}
-              onChange={handleRadioChange}
-            />
-            <span className="ml-2">University</span>
-          </label>
-          <label className="inline-flex items-center">
-            <input
-              type="radio"
-              className="form-radio text-indigo-600 h-5 w-5"
-              value="Admin"
-              checked={selectedLoginType === "Admin"}
-              onChange={handleRadioChange}
-            />
-            <span className="ml-2">Admin</span>
-          </label>
-        </div> */}
+          <div className="flex flex-col gap-2 pb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio h-5 w-5"
+                value="Student"
+                checked={selectedLoginType === "Student"}
+                onChange={handleRadioChange}
+              />
+              <span className="ml-2">Student</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio h-5 w-5"
+                value="University"
+                checked={selectedLoginType === "University"}
+                onChange={handleRadioChange}
+              />
+              <span className="ml-2">University</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio text-indigo-600 h-5 w-5"
+                value="Admin"
+                checked={selectedLoginType === "Admin"}
+                onChange={handleRadioChange}
+              />
+              <span className="ml-2">Admin</span>
+            </label>
+          </div> */}
           <button
             type="submit"
             className="text-ed-text bg-white hover:bg-ed-sec hover:text-white border-solid border-2 border-ed-sec font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center "
