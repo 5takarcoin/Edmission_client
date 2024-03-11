@@ -71,6 +71,23 @@ export default function page() {
 
     fetchData();
   }, []);
+
+  useEffect(() => {
+    async function fetchData() {
+      try {
+        const response = await fetch("http://localhost:5050/api/unis/");
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        const jsonData = await response.json();
+        setData(jsonData);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    }
+
+    fetchData();
+  }, []);
   
   return (
     <div className="">
@@ -84,7 +101,7 @@ export default function page() {
 
       <div className="flex flex-col gap-4 lg:flex-row pb-8">
         <div className="hidden lg:block lg:flex-1">
-          <Sidebar setter={setFilters}/>
+          <Sidebar setter={setData}/>
         </div>
         <div className="lg:hidden w-full p-4 text-md flex justify-between items-center bg-ed-white rounded-md">
           <span>Show filters</span>

@@ -6,7 +6,7 @@ import {
   QuotaOne,
   Ranking,
   Rankings,
-  ScholarshipList,
+  ScholarshipOne,
   Subnmajor,
   University,
 } from "@/types/UniversityTypes";
@@ -92,7 +92,6 @@ export default function UpdateUni({ uni }: { uni: University }) {
 
   // Quota List
   const [uniQuotaList, setUniQuotaList] = useState(uni.quota_list);
-
   const [showUniQuotaAdd, setShowUniQuotaAdd] = useState(false);
 
   const [uniQuotaName, setUniQuotaName] = useState("");
@@ -101,8 +100,9 @@ export default function UpdateUni({ uni }: { uni: University }) {
 
   // Scholarship List
   const [uniScholarshipList, setUniScholarshipList] = useState(
-    [] as ScholarshipList[]
+    uni.scholarship_list
   );
+  const [showUniScholarshipAdd, setShowUniScholarshipAdd] = useState(false);
 
   const [uniScholarshipName, setUniScholarshipName] = useState("");
   const [uniScholarshipAmount, setUniScholarshipAmount] = useState(0);
@@ -173,10 +173,9 @@ export default function UpdateUni({ uni }: { uni: University }) {
       uniApplicationRequirements
     );
 
-    // Subject And Majors
     formData.append("subject_majors", JSON.stringify(uniSubAndMajors));
-    // Quota List
-    // Scholarship List
+    formData.append("quota_list", JSON.stringify(uniQuotaList));
+    formData.append("scholarship_list", JSON.stringify(uniScholarshipList));
 
     formData.append("campus_info[campus]", uniCampusType);
     formData.append("campus_info[permanent]", uniCampusPermanent.toString());
@@ -351,9 +350,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
               </div>
             );
           })}
-          {!showQS && (
-            <button onClick={() => setShowQS(true)}>Add +</button>
-          )}
+          {!showQS && <button onClick={() => setShowQS(true)}>Add +</button>}
           {showQS && (
             <div>
               <InputField
@@ -407,26 +404,24 @@ export default function UpdateUni({ uni }: { uni: University }) {
               </div>
             );
           })}
-        {!showTHE && (
-            <button onClick={() => setShowTHE(true)}>Add +</button>
-          )}
+          {!showTHE && <button onClick={() => setShowTHE(true)}>Add +</button>}
           {showTHE && (
-          <div>
-            <InputField
-              id="add_uni_uniTHEPos"
-              value={uniTHEPosOne}
-              setValue={setUniTHEPosOne}
-            >
-              THE Position
-            </InputField>
-            <InputField
-              id="add_uni_uniTHERank"
-              value={uniTHERankOne}
-              setValue={setUniTHERankOne}
-            >
-              THE Rank
-            </InputField>
-            <button
+            <div>
+              <InputField
+                id="add_uni_uniTHEPos"
+                value={uniTHEPosOne}
+                setValue={setUniTHEPosOne}
+              >
+                THE Position
+              </InputField>
+              <InputField
+                id="add_uni_uniTHERank"
+                value={uniTHERankOne}
+                setValue={setUniTHERankOne}
+              >
+                THE Rank
+              </InputField>
+              <button
                 onClick={() => {
                   setShowTHE(false);
                   const oneRank: Ranking = {
@@ -442,7 +437,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
                 Add
               </button>
             </div>
-          )} 
+          )}
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Admission
           </h3>
@@ -642,6 +637,8 @@ export default function UpdateUni({ uni }: { uni: University }) {
                   </div>
                 );
               })}
+
+              
               {!showUniQuotaAdd && (
                 <button onClick={() => setShowUniQuotaAdd(true)}>Add +</button>
               )}
@@ -696,43 +693,89 @@ export default function UpdateUni({ uni }: { uni: University }) {
               <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
                 Scholarships
               </h3>
+              {uniScholarshipList.map((scholarship, i) => {
+                return (
+                  <div className="flex items-center" key={"update_uni_" + i}>
+                    <p className="w-8/12">{scholarship.name}</p>
+                    <button
+                      onClick={() => {
+                        const temp = uniScholarshipList;
+                        let array = temp.filter((item) => item !== scholarship);
+                        setUniScholarshipList(array);
+                      }}
+                    >
+                      -
+                    </button>
+                  </div>
+                );
+              })}
+              {!showUniScholarshipAdd && (
+                <button onClick={() => setShowUniScholarshipAdd(true)}>
+                  Add +
+                </button>
+              )}
 
-              <InputField
-                id="add_uni_uniScholarshipName"
-                value={uniScholarshipName}
-                setValue={setUniScholarshipName}
-              >
-                Name
-              </InputField>
-              <NumberField
-                id="add_uni_uniScholarshipAmount"
-                value={uniScholarshipAmount}
-                setValue={setUniScholarshipAmount}
-              >
-                Amount
-              </NumberField>
-              <NumberField
-                id="add_uni_uniScholarshipYears"
-                value={uniScholarshipYears}
-                setValue={setUniScholarshipYears}
-              >
-                Years
-              </NumberField>
+              {showUniScholarshipAdd && (
+                <div>
+                  <InputField
+                    id="add_uni_uniScholarshipName"
+                    value={uniScholarshipName}
+                    setValue={setUniScholarshipName}
+                  >
+                    Name
+                  </InputField>
+                  <NumberField
+                    id="add_uni_uniScholarshipAmount"
+                    value={uniScholarshipAmount}
+                    setValue={setUniScholarshipAmount}
+                  >
+                    Amount
+                  </NumberField>
+                  <NumberField
+                    id="add_uni_uniScholarshipYears"
+                    value={uniScholarshipYears}
+                    setValue={setUniScholarshipYears}
+                  >
+                    Years
+                  </NumberField>
 
-              <InputField
-                id="add_uni_uniScholarshipRequirements"
-                value={uniScholarshipRequirements}
-                setValue={setUniScholarshipRequirements}
-              >
-                Requirements
-              </InputField>
-              <InputField
-                id="add_uni_uniScholarshipDetails"
-                value={uniScholarshipDetails}
-                setValue={setUniScholarshipDetails}
-              >
-                Details
-              </InputField>
+                  <InputField
+                    id="add_uni_uniScholarshipRequirements"
+                    value={uniScholarshipRequirements}
+                    setValue={setUniScholarshipRequirements}
+                  >
+                    Requirements
+                  </InputField>
+                  <InputField
+                    id="add_uni_uniScholarshipDetails"
+                    value={uniScholarshipDetails}
+                    setValue={setUniScholarshipDetails}
+                  >
+                    Details
+                  </InputField>
+                  <button
+                    onClick={() => {
+                      setShowUniScholarshipAdd(false);
+                      const oneScholarship: ScholarshipOne = {
+                        name: uniScholarshipName,
+                        amount: uniScholarshipAmount,
+                        noyears: uniScholarshipYears,
+                        requirements: uniScholarshipRequirements,
+                        details: uniScholarshipDetails,
+                      };
+                      setUniScholarshipList([...uniScholarshipList, oneScholarship]);
+
+                      setUniScholarshipName("");
+                      setUniScholarshipAmount(0);
+                      setUniScholarshipYears(0);
+                      setUniScholarshipRequirements("");
+                      setUniScholarshipDetails("");
+                    }}
+                  >
+                    Add
+                  </button>
+                </div>
+              )}
             </div>
           )}
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">

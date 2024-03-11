@@ -4,7 +4,7 @@ import CheckBoxField from "@/components/Organizer/CheckBoxField";
 import InputField from "@/components/Organizer/InputField";
 import NumberField from "@/components/Organizer/NumberField";
 import { SubMajor } from "@/types/CategoryTypes";
-import { QuotaList, ScholarshipList } from "@/types/UniversityTypes";
+import { QuotaOne, Ranking, Rankings, ScholarshipOne } from "@/types/UniversityTypes";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
 
@@ -27,10 +27,8 @@ export default function Signup() {
   const [uniTutionFees, setUniTutionFees] = useState(0);
 
   // Rankings ->
-  const [uniQSPos, setUniQSPos] = useState("");
-  const [uniQSRank, setUniQSRank] = useState("");
-  const [uniTHEPos, setUniTHEPos] = useState("");
-  const [uniTHERank, setUniTHERank] = useState("");
+  const [uniQSRanks, setUniQSRanks] = useState([] as Ranking[]);
+  const [uniTHERanks, setUniTHERanks] = useState([] as Ranking[]);
 
   // Admision Details
   const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(0);
@@ -62,7 +60,7 @@ export default function Signup() {
   const [uniSubAndMajSyllabus, setUniSubAndMajSyllabus] = useState("");
 
   // Quota List
-  const [uniQuotaList, seUniQuotaList] = useState([] as QuotaList[]);
+  const [uniQuotaList, seUniQuotaList] = useState([] as QuotaOne[]);
 
   const [uniQuotaName, setUniQuotaName] = useState("");
   const [uniQuotaRequirements, setUniQuotaRequirements] = useState("");
@@ -70,7 +68,7 @@ export default function Signup() {
 
   // Scholarship List
   const [uniScholarshipList, seUniScholarshipList] = useState(
-    [] as ScholarshipList[]
+    [] as ScholarshipOne[]
   );
 
   const [uniScholarshipName, setUniScholarshipName] = useState("");
@@ -116,10 +114,8 @@ export default function Signup() {
     formData.append("about[creditsystem]", uniCreditSys);
     formData.append("about[tutionfee]", uniTutionFees.toString());
 
-    formData.append("rankings[qs][position]", uniQSPos);
-    formData.append("rankings[qs][ranking]", uniQSRank);
-    formData.append("rankings[the][position]", uniTHEPos);
-    formData.append("rankings[the][ranking]", uniTHERank);
+    formData.append("rankings[qs]", JSON.stringify([]));
+    formData.append("rankings[the]", JSON.stringify([]));
 
     formData.append(
       "admission_details[acceptancerate]",

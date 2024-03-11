@@ -1,15 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
-const SidebarDropdown = ({ name, options }: { name:string, options: string[]}) => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState('');
+const SidebarDropdown = ({ name, options, selected, setSelected }: { name:string, options: string[], selected: string, setSelected: React.Dispatch<React.SetStateAction<string>>}) => {
+  const [isOpen, setIsOpen] = useState(false)
+  
 
   const handleToggleDropdown = () => {
     setIsOpen(!isOpen);
   };
 
   const handleOptionSelect = (option: string) => {
-    setSelectedOption(option);
+    setSelected(option);
     setIsOpen(false);
   };
 
@@ -19,9 +19,9 @@ const SidebarDropdown = ({ name, options }: { name:string, options: string[]}) =
         onClick={handleToggleDropdown}
         className="text-start flex items-center justify-between bg-white border w-[100%] border-gray-300 px-4 py-2 rounded focus:outline-none focus:shadow-outline"
       >
-        <span className={!selectedOption ? "text-gray-500": ""}>
+        <span className={!selected ? "text-gray-500": ""}>
 
-        {selectedOption || name}
+        {selected || name}
         </span>
         <span>
           <img src="./down_arrow.svg" alt="->" />
@@ -33,7 +33,7 @@ const SidebarDropdown = ({ name, options }: { name:string, options: string[]}) =
             { options.map((option, i) => {
               return (
 
-                <button
+                <button key={"sidebar_button_"+i}
                 onClick={() => handleOptionSelect(option)}
                 className="block w-full px-4 py-2 text-left hover:bg-gray-100"
                 >
