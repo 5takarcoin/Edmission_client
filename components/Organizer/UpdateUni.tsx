@@ -5,6 +5,7 @@ import { SubMajor } from "@/types/CategoryTypes";
 import {
   QuotaOne,
   Ranking,
+  Rankings,
   ScholarshipList,
   Subnmajor,
   University,
@@ -33,10 +34,16 @@ export default function UpdateUni({ uni }: { uni: University }) {
 
   // Rankings ->
   const ranks = uni.rankings;
-  const [uniQSPos, setUniQSPos] = useState(ranks.qs[0].position);
-  const [uniQSRank, setUniQSRank] = useState(ranks.qs[0].ranking);
-  const [uniTHEPos, setUniTHEPos] = useState(ranks.the[0].position);
-  const [uniTHERank, setUniTHERank] = useState(ranks.the[0].ranking);
+  const [showQS, setShowQS] = useState(false);
+  const [showTHE, setShowTHE] = useState(false);
+
+  const [uniQSRanks, setUniQSRanks] = useState(ranks.qs);
+  const [uniTHERanks, setUniTHERanks] = useState(ranks.the);
+
+  const [uniQSRankOne, setUniQSRankOne] = useState("");
+  const [uniQSPosOne, setUniQSPosOne] = useState("");
+  const [uniTHERankOne, setUniTHERankOne] = useState("");
+  const [uniTHEPosOne, setUniTHEPosOne] = useState("");
 
   // Admision Details
   const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(
@@ -140,10 +147,8 @@ export default function UpdateUni({ uni }: { uni: University }) {
     formData.append("about[creditsystem]", uniCreditSys);
     formData.append("about[tutionfee]", uniTutionFees.toString());
 
-    formData.append("rankings[qs][position]", uniQSPos);
-    formData.append("rankings[qs][ranking]", uniQSRank);
-    formData.append("rankings[the][position]", uniTHEPos);
-    formData.append("rankings[the][ranking]", uniTHERank);
+    formData.append("rankings[qs]", JSON.stringify(uniQSRanks));
+    formData.append("rankings[the]", JSON.stringify(uniTHERanks));
 
     formData.append(
       "admission_details[acceptancerate]",
@@ -327,35 +332,117 @@ export default function UpdateUni({ uni }: { uni: University }) {
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Ranking
           </h3>
+          <h3 className="font-bold text-md py-2">QS</h3>
+          {uniQSRanks.map((rank, i) => {
+            return (
+              <div className="flex items-center" key={"update_uni_rankqs" + i}>
+                <p className="w-8/12">
+                  {rank.ranking} {rank.position}
+                </p>
+                <button
+                  onClick={() => {
+                    const temp = uniQSRanks;
+                    let array = temp.filter((item) => item !== rank);
+                    setUniQSRanks(array);
+                  }}
+                >
+                  -
+                </button>
+              </div>
+            );
+          })}
+          {!showQS && (
+            <button onClick={() => setShowQS(true)}>Add +</button>
+          )}
+          {showQS && (
+            <div>
+              <InputField
+                id="add_uni_uniQSPos"
+                value={uniQSPosOne}
+                setValue={setUniQSPosOne}
+              >
+                QS Position
+              </InputField>
+              <InputField
+                id="add_uni_uniQSRank"
+                value={uniQSRankOne}
+                setValue={setUniQSRankOne}
+              >
+                QS Rank
+              </InputField>
+              <button
+                onClick={() => {
+                  setShowQS(false);
+                  const oneRank: Ranking = {
+                    position: uniQSPosOne,
+                    ranking: uniQSRankOne,
+                  };
+                  setUniQSRanks([...uniQSRanks, oneRank]);
 
-          <InputField
-            id="add_uni_uniQSPos"
-            value={uniQSPos}
-            setValue={setUniQSPos}
-          >
-            QS Position
-          </InputField>
-          <InputField
-            id="add_uni_uniQSRank"
-            value={uniQSRank}
-            setValue={setUniQSRank}
-          >
-            QS Rank
-          </InputField>
-          <InputField
-            id="add_uni_uniTHEPos"
-            value={uniTHEPos}
-            setValue={setUniTHEPos}
-          >
-            THE Position
-          </InputField>
-          <InputField
-            id="add_uni_uniTHERank"
-            value={uniTHERank}
-            setValue={setUniTHERank}
-          >
-            THE Rank
-          </InputField>
+                  setUniQSRankOne("");
+                  setUniQSPosOne("");
+                }}
+              >
+                Add
+              </button>
+            </div>
+          )}
+
+          <h3 className="font-bold text-md py-2">THE</h3>
+          {uniTHERanks.map((rank, i) => {
+            return (
+              <div className="flex items-center" key={"update_uni_rankthe" + i}>
+                <p className="w-8/12">
+                  {rank.ranking} {rank.position}
+                </p>
+                <button
+                  onClick={() => {
+                    const temp = uniTHERanks;
+                    let array = temp.filter((item) => item !== rank);
+                    setUniTHERanks(array);
+                  }}
+                >
+                  -
+                </button>
+              </div>
+            );
+          })}
+        {!showTHE && (
+            <button onClick={() => setShowTHE(true)}>Add +</button>
+          )}
+          {showTHE && (
+          <div>
+            <InputField
+              id="add_uni_uniTHEPos"
+              value={uniTHEPosOne}
+              setValue={setUniTHEPosOne}
+            >
+              THE Position
+            </InputField>
+            <InputField
+              id="add_uni_uniTHERank"
+              value={uniTHERankOne}
+              setValue={setUniTHERankOne}
+            >
+              THE Rank
+            </InputField>
+            <button
+                onClick={() => {
+                  setShowTHE(false);
+                  const oneRank: Ranking = {
+                    position: uniTHEPosOne,
+                    ranking: uniTHERankOne,
+                  };
+                  setUniTHERanks([...uniTHERanks, oneRank]);
+
+                  setUniTHERankOne("");
+                  setUniTHEPosOne("");
+                }}
+              >
+                Add
+              </button>
+            </div>
+          )} 
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Admission
           </h3>
@@ -540,21 +627,21 @@ export default function UpdateUni({ uni }: { uni: University }) {
                 Quota
               </h3>
               {uniQuotaList.map((quota, i) => {
-            return (
-              <div className="flex items-center" key={"update_uni_" + i}>
-                <p className="w-8/12">{quota.name}</p>
-                <button
-                  onClick={() => {
-                    const temp = uniQuotaList;
-                    let array = temp.filter((item) => item !== quota);
-                    setUniQuotaList(array);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-            );
-          })}
+                return (
+                  <div className="flex items-center" key={"update_uni_" + i}>
+                    <p className="w-8/12">{quota.name}</p>
+                    <button
+                      onClick={() => {
+                        const temp = uniQuotaList;
+                        let array = temp.filter((item) => item !== quota);
+                        setUniQuotaList(array);
+                      }}
+                    >
+                      -
+                    </button>
+                  </div>
+                );
+              })}
               {!showUniQuotaAdd && (
                 <button onClick={() => setShowUniQuotaAdd(true)}>Add +</button>
               )}

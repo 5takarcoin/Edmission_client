@@ -9,7 +9,7 @@ export default function UniHero({ uni }: { uni: University }) {
       <div className="flex-col space-y-8 flex-[2]">
         <div className="flex items-center">
           <div className="h-32 w-32">
-            {/* <img className="" src={"/" + uni.logo} alt={`${uni.name} university logo`} /> */}
+            <img className="object-cover h-full w-full" src={uni.logo} alt={`${uni.name} university logo`} />
           </div>
           <div className="space-y-4 p-4">
             <h2 className="text-4xl font-bold">{uni.name} Showww</h2>
