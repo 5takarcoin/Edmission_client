@@ -4,54 +4,61 @@ import CheckBoxField from "./CheckBoxField";
 import NumberField from "./NumberField";
 import { Reviews } from "@/types/CategoryTypes";
 
-const ReviewField = ({ uniId, userId, setReviews }: { uniId: string; userId: string, setReviews: React.Dispatch<React.SetStateAction<Reviews[]>> }) => {
+const ReviewField = ({
+  uniId,
+  userId,
+  setReviews,
+}: {
+  uniId: string;
+  userId: string;
+  setReviews: React.Dispatch<React.SetStateAction<Reviews[]>>;
+}) => {
   const [rev, setRev] = useState("");
   const [stars, setStars] = useState(0);
   const [rec, setRec] = useState(true);
 
-
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-  
+
     // if (image) formData.append("image", image);
     const body = {
-        view: rev,
-        stars: stars,
-        recommend: rec,
-        by: userId
-      };
-      
-      const url = `http://localhost:5050/api/unis/${uniId}/review`;
-      const response = await fetch(url, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          // Optionally, include Accept header if needed
-          // Accept: "application/json",
-        },
-        body: JSON.stringify(body),
-      });
-      
-      if (response.status === 201) {
-        const data: Reviews[] = await response.json();
-        setReviews(data)
-      }
+      view: rev,
+      stars: stars,
+      recommend: rec,
+      by: userId,
+    };
 
-      setRev("")
-      setRec(false)
-      setStars(0)
-      
-//     const url = "http://localhost:5050/login";
-//     const response = await fetch(url, {
-//       method: "PUT",
-//       headers: {
-//         Accept: "application/json",
-//       },
-//       body: formData,
-//     });
-//     if (response.status === 201) {
-//       console.log(response);
-//     }
+    const url = `http://localhost:5050/api/unis/${uniId}/review`;
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        // Optionally, include Accept header if needed
+        // Accept: "application/json",
+      },
+      body: JSON.stringify(body),
+    });
+
+    if (response.status === 201) {
+      const data: Reviews[] = await response.json();
+      setReviews(data);
+    }
+
+    setRev("");
+    setRec(false);
+    setStars(0);
+
+    //     const url = "http://localhost:5050/login";
+    //     const response = await fetch(url, {
+    //       method: "PUT",
+    //       headers: {
+    //         Accept: "application/json",
+    //       },
+    //       body: formData,
+    //     });
+    //     if (response.status === 201) {
+    //       console.log(response);
+    //     }
   };
 
   return (

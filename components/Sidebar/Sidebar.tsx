@@ -7,7 +7,7 @@ import SidebarSlider from "./SidebarSlider";
 import { CheckboxState } from "@/types/CheckBoxTypes";
 import { IoHelpCircle } from "react-icons/io5";
 
-export default function Sidebar() {
+export default function Sidebar({setter}: {setter: any}) {
   const [selectivityCheckboxes, setSelectivityCheckboxes] = useState<
     CheckboxState[]
   >([
@@ -67,6 +67,11 @@ export default function Sidebar() {
             name="location"
           />
         </div>
+        <div className="bg-ed-sec text- border border-gray-300 rounded shadow">
+
+        <button
+            className="block w-full px-4 py-2 text-left hover:bg-ed-prim hover:text-white"
+            >Reset</button></div>
         {/* ________________________ */}
 
         <SidebarDropdown
@@ -81,7 +86,7 @@ export default function Sidebar() {
         <hr className="w-[60%] mx-auto" />
         <SidebarDropdown
           name={"Exam System"}
-          options={["No Exams", "auto", "gs"]}
+          options={["No Exams", "Autonomous"]}
         />
 
         <SideBarCheckboxGroup
@@ -126,11 +131,11 @@ export default function Sidebar() {
 
         <SidebarDropdown
           name={"Campus Setting"}
-          options={["urban/rural/sub", "urban", "rural", "sub"]}
+          options={["Any", "Urban", "Rural"]}
         />
 
-        <SidebarSlider min={1} minText="8" max={10} maxText="haha" />
-        <SidebarSlider min={4} minText="8" max={8} maxText="haha" />
+        {/* <SidebarSlider min={1} minText="8" max={10} maxText="haha" /> */}
+        {/* <SidebarSlider min={4} minText="8" max={8} maxText="haha" /> */}
       </div>
     </div>
   );

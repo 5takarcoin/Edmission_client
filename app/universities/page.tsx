@@ -53,6 +53,7 @@ import { GoChevronDown } from "react-icons/go";
 export default function page() {
 
   const [data, setData] = useState<University[]>([] as University[]);
+  const [filters, setFilters] = useState({})
 
   useEffect(() => {
     async function fetchData() {
@@ -83,7 +84,7 @@ export default function page() {
 
       <div className="flex flex-col gap-4 lg:flex-row pb-8">
         <div className="hidden lg:block lg:flex-1">
-          <Sidebar />
+          <Sidebar setter={setFilters}/>
         </div>
         <div className="lg:hidden w-full p-4 text-md flex justify-between items-center bg-ed-white rounded-md">
           <span>Show filters</span>

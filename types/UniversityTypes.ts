@@ -42,7 +42,7 @@ export interface ScholarshipList {
   details: string;
 }
 
-export interface QuotaList {
+export interface QuotaOne {
   name: string;
   requirements: string;
   details: string;

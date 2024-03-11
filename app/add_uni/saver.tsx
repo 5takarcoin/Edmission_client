@@ -1,76 +1,54 @@
+"use client";
+
 import CheckBoxField from "@/components/Organizer/CheckBoxField";
 import InputField from "@/components/Organizer/InputField";
 import NumberField from "@/components/Organizer/NumberField";
 import { SubMajor } from "@/types/CategoryTypes";
-import {
-  QuotaOne,
-  Ranking,
-  ScholarshipList,
-  Subnmajor,
-  University,
-} from "@/types/UniversityTypes";
+import { QuotaList, ScholarshipList } from "@/types/UniversityTypes";
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
-export default function UpdateUni({ uni }: { uni: University }) {
+
+export default function Signup() {
   const router = useRouter();
 
-  const [name, setName] = useState(uni.name);
-  const [identifier, setIdentifier] = useState(uni.identifier);
-  const [location, setLocation] = useState(uni.location);
+  const [name, setName] = useState("");
+  const [identifier, setIdentifier] = useState("");
+  const [location, setLocation] = useState("");
   const [image, setImage] = useState<null | File>(null);
   const [logo, setLogo] = useState<null | File>(null);
 
-  const [description, setDescription] = useState(uni.desc);
+  const [description, setDescription] = useState("");
 
   // About -> No dropdown yet
-  const [uniType, setUniType] = useState(uni.about.unitype as string);
-  const [uniGenre, setUniGenre] = useState(uni.about.unigenre as string);
-  const [uniCreditSys, setUniCreditSys] = useState(
-    uni.about.creditsystem as string
-  );
-  const [uniTutionFees, setUniTutionFees] = useState(uni.about.tutionfee);
+  const [uniType, setUniType] = useState("Public");
+  const [uniGenre, setUniGenre] = useState("Other");
+  const [uniCreditSys, setUniCreditSys] = useState("Closed");
+  const [uniTutionFees, setUniTutionFees] = useState(0);
 
   // Rankings ->
-  const ranks = uni.rankings;
-  const [uniQSPos, setUniQSPos] = useState(ranks.qs[0].position);
-  const [uniQSRank, setUniQSRank] = useState(ranks.qs[0].ranking);
-  const [uniTHEPos, setUniTHEPos] = useState(ranks.the[0].position);
-  const [uniTHERank, setUniTHERank] = useState(ranks.the[0].ranking);
+  const [uniQSPos, setUniQSPos] = useState("");
+  const [uniQSRank, setUniQSRank] = useState("");
+  const [uniTHEPos, setUniTHEPos] = useState("");
+  const [uniTHERank, setUniTHERank] = useState("");
 
   // Admision Details
-  const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(
-    uni.admission_details.acceptancerate
-  );
-  const [uniAdmissionExamSystem, setUniAdmissionExamSystem] = useState(
-    uni.admission_details.examsystem as string
-  );
-  const [uniAdmissionSelectionPro, setUniAdmissionSelectionPro] = useState(
-    uni.admission_details.selectionprocedure
-  );
-  const [uniAdmissionQuota, setUniAdmissionQuota] = useState(
-    uni.admission_details.quota
-  );
-  const [uniAdmissionScholarship, setUniAdmissionScholarship] = useState(
-    uni.admission_details.scholarship
-  );
+  const [uniAdmissionAcceptance, setUniAdmissionAcceptance] = useState(0);
+  const [uniAdmissionExamSystem, setUniAdmissionExamSystem] =
+    useState("No exams");
+  const [uniAdmissionSelectionPro, setUniAdmissionSelectionPro] = useState("");
+  const [uniAdmissionQuota, setUniAdmissionQuota] = useState(false);
+  const [uniAdmissionScholarship, setUniAdmissionScholarship] = useState(false);
 
   // Application Details
-  const [uniApplicationWebsite, setUniApplicationWebsite] = useState(
-    uni.application_details.website
-  );
-  const [uniApplicationDeadline, setUniApplicationDeadline] = useState(
-    uni.application_details.deadline
-  );
-  const [uniApplicationFees, setUniApplicationFees] = useState(
-    uni.application_details.fee
-  );
-  const [uniApplicationRequirements, setUniApplicationRequirements] = useState(
-    uni.application_details.requirements
-  );
+  const [uniApplicationWebsite, setUniApplicationWebsite] = useState("");
+  const [uniApplicationDeadline, setUniApplicationDeadline] = useState("");
+  const [uniApplicationFees, setUniApplicationFees] = useState("");
+  const [uniApplicationRequirements, setUniApplicationRequirements] =
+    useState("");
 
   // Subject and Majors
-  const [uniSubAndMajors, setUniSubAndMajors] = useState(uni.subject_majors);
+  const [uniSubAndMajors, setUniSubAndMajors] = useState([] as SubMajor[]);
 
   const [showOneSubMaj, setShowOneSubMaj] = useState(false);
 
@@ -84,16 +62,14 @@ export default function UpdateUni({ uni }: { uni: University }) {
   const [uniSubAndMajSyllabus, setUniSubAndMajSyllabus] = useState("");
 
   // Quota List
-  const [uniQuotaList, setUniQuotaList] = useState(uni.quota_list);
-
-  const [showUniQuotaAdd, setShowUniQuotaAdd] = useState(false);
+  const [uniQuotaList, seUniQuotaList] = useState([] as QuotaList[]);
 
   const [uniQuotaName, setUniQuotaName] = useState("");
   const [uniQuotaRequirements, setUniQuotaRequirements] = useState("");
   const [uniQuotaDetails, setUniQuotaDetails] = useState("");
 
   // Scholarship List
-  const [uniScholarshipList, setUniScholarshipList] = useState(
+  const [uniScholarshipList, seUniScholarshipList] = useState(
     [] as ScholarshipList[]
   );
 
@@ -105,7 +81,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
   const [uniScholarshipDetails, setUniScholarshipDetails] = useState("");
 
   // Campus Info
-  const [uniCampusType, setUniCampusType] = useState("");
+  const [uniCampusType, setUniCampusType] = useState("Urban");
   const [uniCampusPermanent, setUniCampusPermanent] = useState(false);
   const [uniCampusHousing, setUniCampusHousing] = useState(false);
 
@@ -129,7 +105,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const formData = new FormData();
-    formData.append("_id", uni._id);
+    console.log(formData);
     formData.append("name", name);
     formData.append("identifier", identifier);
     formData.append("location", location);
@@ -169,7 +145,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
     );
 
     // Subject And Majors
-    formData.append("subject_majors", JSON.stringify(uniSubAndMajors));
+    formData.append("subject_majors", JSON.stringify(uniSubAndMajors))
     // Quota List
     // Scholarship List
 
@@ -193,29 +169,28 @@ export default function UpdateUni({ uni }: { uni: University }) {
     formData.append("eca_opportunity[total_clubs]", uniECATotal.toString());
     formData.append("eca_opportunity[gradtime]", uniECAClubs.toString());
 
+    formData.append("reviews", JSON.stringify([]))
+
     if (image) formData.append("image", image);
     if (logo) formData.append("logo", logo);
-    console.log("Kemon aso tomra?");
-    // console.log(...formData);
+    console.log("No Problem");
+    console.log(formData);
 
-    const url = "http://localhost:5050/api/unis/" + uni.identifier;
-
+    const url = "http://localhost:5050/api/unis/add";
     const response = await fetch(url, {
-      method: "PUT",
+      method: "POST",
       headers: {
         Accept: "application/json",
       },
       body: formData,
     });
     if (response.status === 201) {
-      router.push(`/university/${uni.identifier}`);
+      router.push(`/university/${identifier}/update`);
       console.log(response);
     }
   };
 
   return (
-    // <div className="flex text-ed-text items-center justify-center min-h-[600px]">
-    //   <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl">
     // <div className="flex text-ed-text items-center justify-center min-h-[600px]">
     <div className="flex text-ed-text">
       {/* <div className="flex-col bg-ed-white p-8 w-11/12 rounded-xl"> */}
@@ -244,7 +219,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
               {image ? (
                 <img src={URL.createObjectURL(image)} alt="" />
               ) : (
-                <img src={uni.img} alt="" />
+                <p>No image selected</p>
               )}
             </div>
             <label
@@ -267,7 +242,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
               {logo ? (
                 <img src={URL.createObjectURL(logo)} alt="" />
               ) : (
-                <img src={uni.logo} alt="" />
+                <p>No logo selected</p>
               )}
             </div>
             <label
@@ -292,7 +267,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
           >
             Description
           </InputField>
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
+          {/* <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             About
           </h3>
           <InputField
@@ -381,6 +356,16 @@ export default function UpdateUni({ uni }: { uni: University }) {
           >
             Admission Selection Process
           </InputField>
+          <CheckBoxField
+            field="Quota"
+            isChecked={uniAdmissionQuota}
+            setIsChecked={setUniAdmissionQuota}
+          />
+          <CheckBoxField
+            field="Scholarship"
+            isChecked={uniAdmissionScholarship}
+            setIsChecked={setUniAdmissionScholarship}
+          />
 
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Application
@@ -418,20 +403,9 @@ export default function UpdateUni({ uni }: { uni: University }) {
             Subject and Majors
           </h3>
           {uniSubAndMajors.map((sumbaj, i) => {
-            return (
-              <div className="flex items-center" key={"update_uni_" + i}>
-                <p className="w-8/12">{sumbaj.submaj}</p>
-                <button
-                  onClick={() => {
-                    const temp = uniSubAndMajors;
-                    let array = temp.filter((item) => item !== sumbaj);
-                    setUniSubAndMajors(array);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-            );
+            return <div key={"add_uni_"+i}>
+              <p>{sumbaj.submaj}</p>
+            </div>
           })}
           {!showOneSubMaj && (
             <button onClick={() => setShowOneSubMaj(true)}>Add +</button>
@@ -491,121 +465,61 @@ export default function UpdateUni({ uni }: { uni: University }) {
                 id="add_uni_uniSubAndMajSyllabus"
                 value={uniSubAndMajSyllabus}
                 setValue={setUniSubAndMajSyllabus}
-              >
+                >
                 Syllabus
               </InputField>
-              <button
-                onClick={() => {
-                  setShowOneSubMaj(false);
-                  const oneSubMaj: SubMajor = {
-                    submaj: uniSubAndMajSubMaj,
-                    seats: uniSubAndMajSeats,
-                    profs: uniSubAndMajProfs,
-                    lects: uniSubAndMajLects,
-                    creds: uniSubAndMajCreds,
-                    estlow: uniSubAndMajEstLow,
-                    esthigh: uniSubAndMajEstHigh,
-                    syl: uniSubAndMajSyllabus,
-                  };
-                  setUniSubAndMajors([...uniSubAndMajors, oneSubMaj]);
+              <button onClick={() => {
+                setShowOneSubMaj(false);
+                const oneSubMaj : SubMajor = {
+                  submaj: uniSubAndMajSubMaj,
+                  seats:  uniSubAndMajSeats,
+                  profs: uniSubAndMajProfs,
+                  lects: uniSubAndMajLects,
+                  creds: uniSubAndMajCreds,
+                  estlow: uniSubAndMajEstLow,
+                  esthigh: uniSubAndMajEstHigh,
+                  syl: uniSubAndMajSyllabus
+                }
+                setUniSubAndMajors([...uniSubAndMajors, oneSubMaj])
 
-                  setUniSubAndMajSubMaj("");
-                  setUniSubAndMajSeats(0);
-                  setUniSubAndMajProfs(0);
-                  setUniSubAndMajLects(0);
-                  setUniSubAndMajCreds(0);
-                  setUniSubAndMajEstLow(0);
-                  setUniSubAndMajEstHigh(0);
-                  setUniSubAndMajSyllabus("");
-                }}
-              >
-                Add
-              </button>
-            </div>
-          )}
-          <div className="border-t border-ed-white my-4"></div>
-          <CheckBoxField
-            field="Quota"
-            isChecked={uniAdmissionQuota}
-            setIsChecked={setUniAdmissionQuota}
-          />
-          <CheckBoxField
-            field="Scholarship"
-            isChecked={uniAdmissionScholarship}
-            setIsChecked={setUniAdmissionScholarship}
-          />
-          {uniAdmissionQuota && (
-            <div>
+                console.log(uniSubAndMajors.toString())
+
+                setUniSubAndMajSubMaj("");
+                setUniSubAndMajSeats(0);
+                setUniSubAndMajProfs(0);
+                setUniSubAndMajLects(0);
+                setUniSubAndMajCreds(0);
+                setUniSubAndMajSyllabus("");
+
+              }}>Add</button>
+                </div>
+              )}
               <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
                 Quota
               </h3>
-              {uniQuotaList.map((quota, i) => {
-            return (
-              <div className="flex items-center" key={"update_uni_" + i}>
-                <p className="w-8/12">{quota.name}</p>
-                <button
-                  onClick={() => {
-                    const temp = uniQuotaList;
-                    let array = temp.filter((item) => item !== quota);
-                    setUniQuotaList(array);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-            );
-          })}
-              {!showUniQuotaAdd && (
-                <button onClick={() => setShowUniQuotaAdd(true)}>Add +</button>
-              )}
 
-              {showUniQuotaAdd && (
-                <div>
-                  <InputField
-                    id="add_uni_uniQuotaName"
-                    value={uniQuotaName}
-                    setValue={setUniQuotaName}
-                  >
-                    Quota Name
-                  </InputField>
-                  <InputField
-                    id="add_uni_uniQuotaRequirements"
-                    value={uniQuotaRequirements}
-                    setValue={setUniQuotaRequirements}
-                  >
-                    Quota Requirements
-                  </InputField>
-                  <InputField
-                    id="add_uni_uniQuotaDetails"
-                    value={uniQuotaDetails}
-                    setValue={setUniQuotaDetails}
-                  >
-                    Quota Details
-                  </InputField>
-                  <button
-                    onClick={() => {
-                      setShowUniQuotaAdd(false);
-                      const oneQuota: QuotaOne = {
-                        name: uniQuotaName,
-                        requirements: uniQuotaRequirements,
-                        details: uniQuotaDetails,
-                      };
-                      setUniQuotaList([...uniQuotaList, oneQuota]);
+              <InputField
+                id="add_uni_uniQuotaName"
+                value={uniQuotaName}
+                setValue={setUniQuotaName}
+              >
+                Quota Name
+              </InputField>
+              <InputField
+                id="add_uni_uniQuotaRequirements"
+                value={uniQuotaRequirements}
+                setValue={setUniQuotaRequirements}
+              >
+                Quota Requirements
+              </InputField>
+              <InputField
+                id="add_uni_uniQuotaDetails"
+                value={uniQuotaDetails}
+                setValue={setUniQuotaDetails}
+              >
+                Quota Details
+              </InputField>
 
-                      setUniQuotaName("");
-                      setUniQuotaRequirements("");
-                      setUniQuotaDetails("");
-                    }}
-                  >
-                    Add
-                  </button>
-                </div>
-              )}
-            </div>
-          )}
-
-          {uniAdmissionScholarship && (
-            <div>
               <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
                 Scholarships
               </h3>
@@ -646,8 +560,6 @@ export default function UpdateUni({ uni }: { uni: University }) {
               >
                 Details
               </InputField>
-            </div>
-          )}
           <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
             Campus Type
           </h3>
@@ -701,22 +613,10 @@ export default function UpdateUni({ uni }: { uni: University }) {
             ECA Opportunities
           </h3>
           {uniECAClubs.map((club, i) => {
-            return (
-              <div className="flex items-center" key={"eca_clubs" + i}>
-                <p>{club}</p>
-                <button
-                  onClick={() => {
-                    const temp = uniECAClubs;
-                    let array = temp.filter((item) => item !== club);
-                    setUniECAClubs(array);
-                  }}
-                >
-                  -
-                </button>
-              </div>
-            );
+            return <div key={"eca_clubs"+i}>
+              <p>{club}</p>
+            </div>
           })}
-
           {/* <NumberField
             id="add_uni_uniECATotal"
             value={uniECATotal}
@@ -736,18 +636,22 @@ export default function UpdateUni({ uni }: { uni: University }) {
               >
                 Club
               </InputField>
-              <button
-                onClick={() => {
-                  setShowOneECA(false);
-                  setUniECAClubs([...uniECAClubs, uniECAOneClub]);
-                  setUniECAOneClub("");
-                }}
-              >
-                Add
-              </button>
-            </div>
-          )}
-          <h3 className="font-bold text-xl w-full border-t pt-8 border-ed-white my-4">
+              <button onClick={() => {
+          
+                setUniECAClubs([...uniECAClubs, uniECAOneClub])
+                setUniECAOneClub("")
+
+              }}>Add</button>
+                </div>
+              )}
+          {/* <InputField
+            id="add_uni_uniECAClubs"
+            value={uniECAOneClub}
+            setValue={setUniECAOneClub}
+          >
+            ECA Clubs
+          </InputField> */}
+          <h3 className="font-bold text-xl w-full border-t pt-8 ed-white-4">
             Notable Alumnis
           </h3>
 
@@ -757,7 +661,41 @@ export default function UpdateUni({ uni }: { uni: University }) {
             setValue={setUniECAOneAlumni}
           >
             Notable Alumnis
-          </InputField>
+          </InputField> 
+
+          {/*           
+          <div className="flex flex-col gap-2 pb-4">
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio h-5 w-5"
+                value="Student"
+                checked={selectedLoginType === "Student"}
+                onChange={handleRadioChange}
+              />
+              <span className="ml-2">Student</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio h-5 w-5"
+                value="University"
+                checked={selectedLoginType === "University"}
+                onChange={handleRadioChange}
+              />
+              <span className="ml-2">University</span>
+            </label>
+            <label className="inline-flex items-center">
+              <input
+                type="radio"
+                className="form-radio text-indigo-600 h-5 w-5"
+                value="Admin"
+                checked={selectedLoginType === "Admin"}
+                onChange={handleRadioChange}
+              />
+              <span className="ml-2">Admin</span>
+            </label>
+          </div> */}
           <button
             type="submit"
             className="text-ed-text bg-white hover:bg-ed-sec hover:text-white border-solid border-2 border-ed-sec font-medium rounded-md text-sm w-full sm:w-auto px-5 py-2.5 text-center "
