@@ -63,7 +63,7 @@ export default function Sidebar({
       admission_details,
     };
 
-    const url = "http://localhost:5050/api/unis/filter";
+    const url = process.env.NEXT_PUBLIC_API + "api/unis/filter";
     const response = await fetch(url, {
       method: "POST",
       credentials: "include",

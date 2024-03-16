@@ -11,7 +11,7 @@ export default function Logout() {
   const handleLogout = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const url = "http://localhost:5050/logout";
+    const url = process.env.NEXT_PUBLIC_API + "logout";
     const response = await fetch(url, {
       credentials: "include",
     });

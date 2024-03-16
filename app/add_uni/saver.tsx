@@ -176,7 +176,7 @@ export default function Signup() {
     console.log("No Problem");
     console.log(formData);
 
-    const url = "http://localhost:5050/api/unis/add";
+    const url = process.env.NEXT_PUBLIC_API + "api/unis/add";
     const response = await fetch(url, {
       method: "POST",
       headers: {

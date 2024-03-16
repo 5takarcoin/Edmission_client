@@ -27,7 +27,7 @@ const [selectedLoginType, setSelectedLoginType] =
     formData.append("recommend", recommend.toString());
     formData.append("stars", stars.toString());
 
-    const url = "http://localhost:5050/review/add";
+    const url = process.env.NEXT_PUBLIC_API + "review/add";
     const response = await fetch(url, {
       method: "POST",
       headers: {

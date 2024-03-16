@@ -33,7 +33,7 @@ export default function Login() {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
 
-    const url = "http://localhost:5050/login";
+    const url = process.env.NEXT_PUBLIC_API + "login";
     const response = await fetch(url, {
       method: 'POST',
       credentials: 'include',

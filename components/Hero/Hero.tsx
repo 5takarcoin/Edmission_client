@@ -5,7 +5,7 @@ export default function Hero() {
     <div className="flex flex-col px-6 justify-around h-full lg:max-w-[60%] m-auto text-center">
       <div className="space-y-4 w-[90vw] m-auto min-w-[70%] md:max-w-[80%]">
         <h1 className="text-5xl text-ed-text font-bold">
-          Find Your Ideal Educational Institution
+          Find Your Ideal Educational Institution {process.env.API_LINK}
         </h1>
         <p>
           Finding the right school should not be hard. From high school to

@@ -41,7 +41,7 @@ export default function Navbar() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const url = "http://localhost:5050/currUser"; 
+        const url = process.env.NEXT_PUBLIC_API + "currUser"; 
         const response = await fetch(url, {
           method: 'GET',
           credentials: 'include',

@@ -55,7 +55,7 @@ export default function Page({ params }: { params: { uni: string } }) {
       try {
         console.log("HH hah", params.uni);
         const response = await fetch(
-          `http://localhost:5050/api/unis/${params.uni}`
+          `${process.env.NEXT_PUBLIC_API}api/unis/${params.uni}`
         );
         if (!response.ok) {
           throw new Error("Network response was not ok");

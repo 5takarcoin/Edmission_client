@@ -202,7 +202,7 @@ export default function UpdateUni({ uni }: { uni: University }) {
     console.log("Kemon aso tomra?");
     // console.log(...formData);
 
-    const url = "http://localhost:5050/api/unis/" + uni.identifier;
+    const url = process.env.NEXT_PUBLIC_API + "api/unis/" + uni.identifier;
 
     const response = await fetch(url, {
       method: "PUT",

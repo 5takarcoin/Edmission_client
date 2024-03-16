@@ -32,7 +32,7 @@ export default function Signup() {
 
 
     console.log(username, name,password)
-    const url = "http://localhost:5050/signup";
+    const url = process.env.NEXT_PUBLIC_API + "signup";
     const response = await fetch(url, {
       method: 'POST',
       headers: {

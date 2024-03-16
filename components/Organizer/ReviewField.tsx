@@ -28,7 +28,7 @@ const ReviewField = ({
       by: userId,
     };
 
-    const url = `http://localhost:5050/api/unis/${uniId}/review`;
+    const url = `${process.env.NEXT_PUBLIC_API}api/unis/${uniId}/review`;
     const response = await fetch(url, {
       method: "POST",
       headers: {
@@ -48,17 +48,6 @@ const ReviewField = ({
     setRec(false);
     setStars(0);
 
-    //     const url = "http://localhost:5050/login";
-    //     const response = await fetch(url, {
-    //       method: "PUT",
-    //       headers: {
-    //         Accept: "application/json",
-    //       },
-    //       body: formData,
-    //     });
-    //     if (response.status === 201) {
-    //       console.log(response);
-    //     }
   };
 
   return (

@@ -20,7 +20,7 @@ export default function Users() {
   const getUsers = async (e: React.MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
 
-    const url = "http://localhost:5050/api/users";
+    const url = process.env.NEXT_PUBLIC_API + "api/users";
     const response = await fetch(url, {
       method: "GET",
       credentials: "include",

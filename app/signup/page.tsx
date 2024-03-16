@@ -39,7 +39,7 @@ export default function Signup() {
     // if (image) formData.append("image", image);
     
     console.log(username, name, password, selectedLoginType);
-    const url = "http://localhost:5050/signup";
+    const url = process.env.NEXT_PUBLIC_API + "signup";
     const response = await fetch(url, {
       method: "POST",
       headers: {

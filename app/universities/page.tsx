@@ -58,7 +58,10 @@ export default function page() {
   useEffect(() => {
     async function fetchData() {
       try {
-        const response = await fetch("http://localhost:5050/api/unis/");
+        const url = process.env.NEXT_PUBLIC_API
+        console.log("Dafaks going on")
+        console.log(url)
+        const response = await fetch(url + "api/unis/");
         if (!response.ok) {
           throw new Error('Network response was not ok');
         }
@@ -72,23 +75,6 @@ export default function page() {
     fetchData();
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      try {
-        const response = await fetch("http://localhost:5050/api/unis/");
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
-        }
-        const jsonData = await response.json();
-        setData(jsonData);
-      } catch (error) {
-        console.error('Error fetching data:', error);
-      }
-    }
-
-    fetchData();
-  }, []);
-  
   return (
     <div className="">
       <div className="py-8">
